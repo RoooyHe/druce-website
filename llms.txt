@@ -18,7 +18,7 @@
 - [技术架构](/druce-website/architecture/index.md): 初步报告模块的技术栈、数据流与数据来源策略。
 - [数据流](/druce-website/architecture/data-flow.md): 初步报告模块的核心数据流，从用户输入到报告生成的完整链路。
 - [数据来源策略](/druce-website/architecture/data-sources.md): 无金融 API 方案下的数据来源策略，涵盖公开研报、公告财报、新闻资讯、私有数据与社区情绪。
-- [技术架构演进路线](/druce-website/architecture/road-map.md): 从当前 Demo 架构到生产级系统的五层架构细化、核心差距分析与演进路径规划。
+- [技术架构演进路线](/druce-website/architecture/road-map.md): Druce 的目标参考架构（五层）与当前 Demo 实现（同步单进程 Streamlit）之间的差距，区分跨越交付边界的必补项与通用 Agent 模板借用的项。
 
 ## 开发指南
 
