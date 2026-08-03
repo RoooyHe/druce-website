@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "author": "RoyHe <roooyhe@163.com>",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "rspress dev",

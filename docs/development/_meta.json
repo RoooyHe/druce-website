@@ -1,0 +1,6 @@
+[
+  { "type": "file", "name": "getting-started", "label": "快速开始" },
+  { "type": "file", "name": "codebase-map", "label": "代码导览" },
+  { "type": "file", "name": "local-dev", "label": "本地开发" },
+  { "type": "file", "name": "deployment", "label": "部署" }
+]

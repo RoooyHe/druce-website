@@ -1,5 +1,6 @@
 [
   { "type": "file", "name": "index", "label": "技术栈" },
   { "type": "file", "name": "data-flow", "label": "数据流" },
-  { "type": "file", "name": "data-sources", "label": "数据来源策略" }
+  { "type": "file", "name": "data-sources", "label": "数据来源策略" },
+  { "type": "file", "name": "road-map", "label": "演进路线" }
 ]
