@@ -1,0 +1,24 @@
+# Druce
+
+> AI 投研助手
+
+## 产品概览
+
+- [产品概览](/druce-website/overview/index.md): AI 投研助手初步报告模块的产品定位、目标用户与 Demo 展示场景。
+- [目标用户与场景](/druce-website/overview/users.md): AI 投研助手的三类目标用户、典型使用场景与核心诉求。
+- [Demo 展示场景](/druce-website/overview/scenarios.md): 初步报告模块 Demo 阶段的三个核心展示场景及其演示流程。
+
+## 核心功能
+
+- [核心功能](/druce-website/features/index.md): 初步报告模块 P0 级核心功能清单与验收标准。
+- [验收标准](/druce-website/features/acceptance.md): 初步报告模块 Demo 阶段的 5 条验收标准，涵盖问题拆解、信源数量、引用规范、私有数据与响应时间。
+
+## 技术架构
+
+- [技术架构](/druce-website/architecture/index.md): 初步报告模块的技术栈、数据流与数据来源策略。
+- [数据流](/druce-website/architecture/data-flow.md): 初步报告模块的核心数据流，从用户输入到报告生成的完整链路。
+- [数据来源策略](/druce-website/architecture/data-sources.md): 无金融 API 方案下的数据来源策略，涵盖公开研报、公告财报、新闻资讯、私有数据与社区情绪。
+
+## 原始 PRD
+
+- [产品需求文档（精简版）](/druce-website/初步报告生成PRD.md)

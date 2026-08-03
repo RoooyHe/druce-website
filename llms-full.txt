@@ -1,0 +1,522 @@
+---
+url: /druce-website/overview/index.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/overview/index.md.
+
+# 产品定位
+
+面向投研人员的 **AI 信息聚合工具**，输入一个研究问题，自动执行多轮搜索、交叉验证，生成带引用链接的结构化报告。
+
+## 一句话卖点
+
+花 5 分钟得到别人花 5 小时手动搜索才能凑齐的行业情报。
+
+## 核心差异
+
+**支持批量接入私有数据（内部研报 / 纪要），而非仅依赖公开信息。**
+
+- 输入研究问题，自动完成搜索与验证
+- 结果带引用链接、来源时间，可追溯
+- 优先融合用户上传的内部资料
+
+## 本节页面
+
+| 页面                                                | 内容                      |
+| :------------------------------------------------ | :---------------------- |
+| [目标用户与场景](/druce-website/overview/users.md)       | 三类目标用户、典型使用场景与核心诉求      |
+| [Demo 展示场景](/druce-website/overview/scenarios.md) | Demo 阶段的 3 个核心展示场景及演示流程 |
+
+> 详细的产品愿景与差异化分析，参见 [原始 PRD](/druce-website/初步报告生成PRD.md)。
+
+
+
+---
+url: /druce-website/overview/users.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/overview/users.md.
+
+# 目标用户与场景
+
+| 用户    | 场景          | 核心诉求         |
+| :---- | :---------- | :----------- |
+| 买方研究员 | 周报 / 晨会素材搜集 | 快、广、可信       |
+| 投资经理  | 验证个人判断框架    | 私有数据融合、定制化分析 |
+| 个人投资者 | 自选股盯盘与异动归因  | 实时提醒、社区情绪监控  |
+
+## 买方研究员
+
+需要快速汇集行业观点、公司动态、研报数据，用于周报、晨会素材准备。核心诉求是 **快、广、可信**：
+通过多轮联网搜索与交叉验证，覆盖 500-1000 个网页，确保信息来源可靠。
+
+## 投资经理
+
+希望验证自己的投资判断框架。核心诉求是 **私有数据融合、定制化分析**：
+将内部纪要、个人研报上传至知识库，提问时优先检索内部资料，再补充公开信息作为佐证。
+
+## 个人投资者
+
+关注自选股的实时动态与异动归因。核心诉求是 **实时提醒、社区情绪监控**：
+通过限定站点搜索聚合雪球、东财股吧等社区情绪，辅助决策。
+
+
+
+---
+url: /druce-website/overview/scenarios.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/overview/scenarios.md.
+
+# Demo 展示场景（3 个）
+
+## 1. 多源聚合
+
+输入 **"本周电子行业观点"** → 展示搜索 → 交叉验证 → 带引用报告。
+
+演示要点：
+
+- 自动拆解为多个子搜索词
+- 多轮并行搜索，每词 3-5 条结果
+- 同一观点至少 2 个独立信源，冲突则并列展示
+
+## 2. 私有数据优势
+
+上传内部纪要 → 提问 **"这家公司近期有无公开更新？"** → 展示私有 + 公开融合回答。
+
+演示要点：
+
+- 上传 PDF / Word 内部资料
+- 优先引用内部资料，再补充公开信息
+- 报告中明确标注引用来源（私有 / 公开）
+
+## 3. 框架对齐
+
+输入 **"按巴菲特护城河框架，分析我自选股"** → 展示按指定逻辑筛选点评。
+
+演示要点：
+
+- 支持指定分析框架（巴菲特护城河、波特五力等）
+- 按框架维度输出分点详述
+- 框架维度缺失数据时如实告知
+
+
+
+---
+url: /druce-website/features/index.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/features/index.md.
+
+# 核心功能概览
+
+## P0（Demo 必做）
+
+| 功能     | 说明                             |
+| :----- | :----------------------------- |
+| 问题拆解   | 将用户问题自动拆为 3-5 个子搜索词            |
+| 多轮联网搜索 | 并行搜索，覆盖 500-1000 网页 / 次        |
+| 交叉验证   | 同一观点至少 2 个独立信源，冲突则并列           |
+| 引用标注   | 每个数据点标注来源 + 链接 + 时间，末尾附参考清单    |
+| 报告生成   | 结构化输出（摘要 → 分点详述 → 风险提示 → 参考资料） |
+| 私有数据上传 | 支持上传 PDF / Word，优先检索内部知识库      |
+
+## 功能详述
+
+### 问题拆解
+
+用户输入自然语言研究问题，由 LLM 自动拆解为 3-5 个可搜索的子关键词。
+拆解结果对用户可见，便于校验和手动调整。
+
+### 多轮联网搜索
+
+基于拆解出的子关键词，并行执行多轮搜索：
+
+- 每个子词返回 3-5 条结果
+- 单次任务覆盖 500-1000 个网页
+- 使用 Tavily / Bing 搜索 API，不使用任何金融数据 API
+
+### 交叉验证
+
+对同一观点强制交叉验证：
+
+- 至少 2 个独立信源相互印证
+- 信源冲突时并列展示，不擅自裁决
+- 低权威信源标注 **"非机构观点"**
+
+### 引用标注
+
+报告中所有数据点必须标注：
+
+- 来源（机构 / 媒体 / 社区）
+- 原文链接
+- 发布时间
+- 末尾附完整参考资料清单，无遗漏
+
+### 报告生成
+
+输出结构化报告，固定包含以下部分：
+
+1. **摘要** — 核心结论的一段式概述
+2. **分点详述** — 按主题分点展开，每点带引用
+3. **风险提示** — 数据局限性、信源冲突点
+4. **参考资料** — 全部引用的来源清单
+
+### 私有数据上传
+
+支持用户上传 PDF / Word 格式的内部资料：
+
+- 上传后进入本地 RAG 向量检索
+- 提问时优先检索内部资料
+- 再补充公开信息作为佐证
+
+## 本节页面
+
+| 页面                                            | 内容               |
+| :-------------------------------------------- | :--------------- |
+| [验收标准](/druce-website/features/acceptance.md) | Demo 阶段的 5 条验收标准 |
+
+
+
+---
+url: /druce-website/features/acceptance.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/features/acceptance.md.
+
+# 验收标准
+
+| 编号    | 验收项  | 标准                    |
+| :---- | :--- | :-------------------- |
+| AC-01 | 问题拆解 | 自动生成 ≥3 个子搜索词，用户可见    |
+| AC-02 | 信源数量 | 每个观点至少 2 个独立来源        |
+| AC-03 | 引用规范 | 所有引用含来源 + 链接 + 时间，无遗漏 |
+| AC-04 | 私有数据 | 上传后优先引用内部资料，再补充公开信息   |
+| AC-05 | 响应时间 | 单次报告 ≤ 15 分钟          |
+
+## 验收项说明
+
+### AC-01 问题拆解
+
+LLM 必须自动将用户问题拆解为至少 3 个子搜索词，且拆解过程对用户可见，
+便于人工校验和手动调整。
+
+### AC-02 信源数量
+
+报告中每一个观点都必须有至少 2 个独立信源相互印证。
+信源冲突时并列展示，不得擅自裁决或忽略冲突。
+
+### AC-03 引用规范
+
+报告中所有数据点必须完整标注来源、原文链接、发布时间，
+末尾附完整参考资料清单，无遗漏。
+
+### AC-04 私有数据
+
+用户上传内部资料后，系统必须优先引用内部资料，
+再补充公开信息作为佐证，而非相反。
+
+### AC-05 响应时间
+
+从用户提交问题到报告生成完成，单次任务总时长不超过 15 分钟。
+长任务通过异步机制（Celery + Redis）执行，不阻塞界面。
+
+
+
+---
+url: /druce-website/architecture/index.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/architecture/index.md.
+
+# 技术栈
+
+| 层        | 选型                       | 说明                         |
+| :------- | :----------------------- | :------------------------- |
+| 前端       | Streamlit                | 快速 Demo，无需前端开发             |
+| Agent 编排 | LangChain / MCP          | 任务拆解、工具调度                  |
+| 搜索       | Tavily API / Bing API    | **不使用任何金融数据 API**          |
+| 私有知识库    | Chroma + PyPDF           | 向量检索 + PDF 解析              |
+| LLM      | GPT-3.5-turbo / DeepSeek | 低成本，DeepSeek 为 OpenAI 1/10 |
+| 异步任务     | Celery + Redis（可选）       | 长任务不阻塞界面                   |
+
+## 选型要点
+
+### 前端：Streamlit
+
+Demo 阶段追求快速验证，Streamlit 提供纯 Python 的 Web 界面能力，
+无需独立前端开发，适合单人小团队快速迭代。
+
+### Agent 编排：LangChain / MCP
+
+LangChain 用于任务拆解与工具调度，MCP（Model Context Protocol）
+用于标准化工具接入，两者结合实现多轮搜索编排。
+
+### 搜索：Tavily / Bing API
+
+**核心原则：不使用任何金融数据 API。** 全部通过通用搜索 API 获取公开信息，
+降低合规风险与数据成本。
+
+### 私有知识库：Chroma + PyPDF
+
+Chroma 提供本地向量数据库能力，PyPDF 负责 PDF 文本解析。
+两者结合实现用户私有资料的本地 RAG 检索，数据不出本地。
+
+### LLM：GPT-3.5-turbo / DeepSeek
+
+Demo 阶段优先低成本方案：
+
+- GPT-3.5-turbo 作为默认选项，生态成熟
+- DeepSeek 作为备选，成本约为 OpenAI 的 1/10
+
+### 异步任务：Celery + Redis（可选）
+
+单次报告生成耗时较长（≤15 分钟），通过 Celery + Redis 实现异步任务队列，
+避免长任务阻塞用户界面。Demo 阶段可选。
+
+## 本节页面
+
+| 页面                                                    | 内容                   |
+| :---------------------------------------------------- | :------------------- |
+| [数据流](/druce-website/architecture/data-flow.md)       | 从用户输入到报告生成的 6 节点核心流程 |
+| [数据来源策略](/druce-website/architecture/data-sources.md) | 无金融 API 方案下的 5 类数据来源 |
+
+> 相关数据流程参见 [数据流](/druce-website/architecture/data-flow.md)。
+
+
+
+---
+url: /druce-website/architecture/data-flow.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/architecture/data-flow.md.
+
+# 数据流（核心流程）
+
+```text
+用户输入问题
+    ↓
+LLM 拆解为 3-5 个子搜索词
+    ↓
+并行执行搜索（每词 3-5 条结果）
+    ↓
+合并搜索结果 + 用户私有数据（如有）
+    ↓
+LLM 生成带引用的结构化报告
+    ↓
+前端展示 + 来源追溯
+```
+
+## 流程节点说明
+
+### 1. 用户输入问题
+
+用户在前端（Streamlit）输入自然语言研究问题，
+例如 "本周电子行业观点" 或 "按巴菲特护城河框架分析自选股"。
+
+### 2. LLM 拆解为子搜索词
+
+LLM 将用户问题自动拆解为 3-5 个可搜索的子关键词，
+拆解结果对用户可见，便于人工校验。
+
+### 3. 并行执行搜索
+
+基于拆解出的子关键词，并行执行多轮搜索：
+
+- 每个子词返回 3-5 条结果
+- 单次任务覆盖 500-1000 个网页
+- 使用 Tavily / Bing 搜索 API
+
+### 4. 合并搜索结果 + 私有数据
+
+将多轮搜索结果去重合并，同时检索用户上传的私有数据（如有），
+形成统一的上下文供 LLM 生成报告。
+
+### 5. LLM 生成带引用的结构化报告
+
+LLM 基于合并后的上下文生成结构化报告，
+报告包含摘要、分点详述、风险提示、参考资料四部分，
+每个数据点带来源 + 链接 + 时间标注。
+
+### 6. 前端展示 + 来源追溯
+
+报告在前端展示，用户可点击引用链接追溯原始来源，
+系统对低权威信源标注 "非机构观点"。
+
+> 数据来源策略详见 [数据来源策略](/druce-website/architecture/data-sources.md)。
+
+
+
+---
+url: /druce-website/architecture/data-sources.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/architecture/data-sources.md.
+
+# 数据来源策略（无金融 API 方案）
+
+| 类型      | 来源              | 获取方式          |
+| :------ | :-------------- | :------------ |
+| 公开研报    | 东方财富研报中心、雪球、格隆汇 | 搜索引擎爬取        |
+| 公告 / 财报 | 巨潮资讯网           | 搜索引擎 + PDF 解析 |
+| 新闻资讯    | 新浪财经、华尔街见闻      | 搜索引擎          |
+| 私有数据    | 用户上传 PDF / Word | 本地 RAG 向量检索   |
+| 社区情绪    | 雪球、东财股吧         | 搜索引擎限定站点      |
+
+## 策略要点
+
+### 公开研报
+
+通过搜索引擎爬取东方财富研报中心、雪球、格隆汇等公开研报来源，
+不依赖任何金融数据 API。
+
+### 公告 / 财报
+
+通过搜索引擎 + PDF 解析获取巨潮资讯网的公告与财报数据，
+PyPDF 负责公告 PDF 的文本解析。
+
+### 新闻资讯
+
+通过搜索引擎获取新浪财经、华尔街见闻等财经媒体的新闻资讯，
+覆盖行业动态、公司新闻、政策解读等。
+
+### 私有数据
+
+用户上传 PDF / Word 格式的内部资料，
+通过 Chroma 向量数据库实现本地 RAG 检索，数据不出本地。
+
+### 社区情绪
+
+通过搜索引擎限定站点（site:）的方式，
+聚合雪球、东财股吧等社区的情绪数据，辅助判断市场情绪。
+
+> 风险与应对策略详见 [原始 PRD](/druce-website/初步报告生成PRD.md) 第九节。
+
+
+
+---
+url: /druce-website/初步报告生成PRD.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/初步报告生成PRD.md.
+
+# 产品需求文档（精简版）
+
+## AI投研助手 - 初步报告模块
+
+**版本**：V1.0 | **日期**：2026.07.31 | **状态**：Demo阶段
+
+## 一、产品定位
+
+面向投研人员的**AI信息聚合工具**，输入一个研究问题，自动执行多轮搜索、交叉验证，生成带引用链接的结构化报告。**核心差异**：支持批量接入私有数据（内部研报/纪要），而非仅依赖公开信息。
+
+**一句话卖点**：花5分钟得到别人花5小时手动搜索才能凑齐的行业情报。
+
+## 二、目标用户与场景
+
+| 用户    | 场景         | 核心诉求         |
+| :---- | :--------- | :----------- |
+| 买方研究员 | 周报/晨会素材搜集  | 快、广、可信       |
+| 投资经理  | 验证个人判断框架   | 私有数据融合、定制化分析 |
+| 个人投资者 | 自选股盯盘与异动归因 | 实时提醒、社区情绪监控  |
+
+## 三、核心功能
+
+### P0（Demo必做）
+
+| 功能     | 说明                       |
+| :----- | :----------------------- |
+| 问题拆解   | 将用户问题自动拆为3-5个子搜索词        |
+| 多轮联网搜索 | 并行搜索，覆盖500-1000网页/次      |
+| 交叉验证   | 同一观点至少2个独立信源，冲突则并列       |
+| 引用标注   | 每个数据点标注来源+链接+时间，末尾附参考清单  |
+| 报告生成   | 结构化输出（摘要→分点详述→风险提示→参考资料） |
+| 私有数据上传 | 支持上传PDF/Word，优先检索内部知识库   |
+
+## 四、数据来源策略（无金融API方案）
+
+| 类型    | 来源              | 获取方式       |
+| :---- | :-------------- | :--------- |
+| 公开研报  | 东方财富研报中心、雪球、格隆汇 | 搜索引擎爬取     |
+| 公告/财报 | 巨潮资讯网           | 搜索引擎+PDF解析 |
+| 新闻资讯  | 新浪财经、华尔街见闻      | 搜索引擎       |
+| 私有数据  | 用户上传PDF/Word    | 本地RAG向量检索  |
+| 社区情绪  | 雪球、东财股吧         | 搜索引擎限定站点   |
+
+## 五、技术栈
+
+| 层       | 选型                       | 说明                       |
+| :------ | :----------------------- | :----------------------- |
+| 前端      | Streamlit                | 快速Demo，无需前端开发            |
+| Agent编排 | LangChain / MCP          | 任务拆解、工具调度                |
+| 搜索      | Tavily API / Bing API    | **不使用任何金融数据API**         |
+| 私有知识库   | Chroma + PyPDF           | 向量检索+PDF解析               |
+| LLM     | GPT-3.5-turbo / DeepSeek | 低成本，DeepSeek为OpenAI 1/10 |
+| 异步任务    | Celery + Redis（可选）       | 长任务不阻塞界面                 |
+
+## 六、数据流（核心流程）
+
+用户输入问题
+↓
+LLM拆解为3-5个子搜索词
+↓
+并行执行搜索（每词3-5条结果）
+↓
+合并搜索结果 + 用户私有数据（如有）
+↓
+LLM生成带引用的结构化报告
+↓
+前端展示 + 来源追溯
+
+## 七、验收标准
+
+| 编号    | 验收项  | 标准                  |
+| :---- | :--- | :------------------ |
+| AC-01 | 问题拆解 | 自动生成≥3个子搜索词，用户可见    |
+| AC-02 | 信源数量 | 每个观点至少2个独立来源        |
+| AC-03 | 引用规范 | 所有引用含来源+链接+时间，无遗漏   |
+| AC-04 | 私有数据 | 上传后优先引用内部资料，再补充公开信息 |
+| AC-05 | 响应时间 | 单次报告≤15分钟           |
+
+## 八、Demo展示场景（3个）
+
+1. **多源聚合**：输入"本周电子行业观点"→ 展示搜索→交叉验证→带引用报告
+
+2. **私有数据优势**：上传内部纪要 → 提问"这家公司近期有无公开更新？"→ 展示私有+公开融合回答
+
+3. **框架对齐**：输入"按巴菲特护城河框架，分析我自选股"→ 展示按指定逻辑筛选点评
+
+## 九、风险与应对
+
+| 风险         | 应对                        |
+| :--------- | :------------------------ |
+| 搜索内容质量参差   | 强制交叉验证，低权威信源标注"非机构观点"     |
+| 爬虫被封       | 优先用搜索API，不硬爬特定站           |
+| LLM幻觉/伪造来源 | Prompt强制"无结果如实告知"，后处理校验链接 |
+
+
+
+---
+url: /druce-website/index.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/index.md.
+
+# AI 投研助手
+
+Druce
+
+> 花五分钟得到别人花五小时手动搜索才能凑齐的行业情报
+
+[产品概览](/overview/) | [核心功能](/features/)
+
+## Features
+
+- 🔍 **问题拆解**: 将用户问题自动拆为 3-5 个子搜索词，拆解过程对用户可见，便于人工校验和手动调整。
+- 🌐 **多轮联网搜索**: 并行执行多轮搜索，单次任务覆盖 500-1000 个网页，使用 Tavily / Bing 搜索 API，不使用任何金融数据 API。
+- ✓ **交叉验证**: 同一观点至少 2 个独立信源相互印证，信源冲突时并列展示，低权威信源标注「非机构观点」。
+- 🔗 **引用标注**: 每个数据点标注来源、原文链接、发布时间，末尾附完整参考资料清单，无遗漏。
+- 📄 **报告生成**: 结构化输出（摘要 → 分点详述 → 风险提示 → 参考资料），单次报告响应时间 ≤ 15 分钟。
+- 📁 **私有数据上传**: 支持上传 PDF / Word 格式的内部资料，通过 Chroma 向量数据库实现本地 RAG 检索，数据不出本地。
+
+

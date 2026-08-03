@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>产品需求文档（精简版） - Druce</title>
+<script>{;const saved = localStorage.getItem('rspress-theme-appearance');const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;const defaultTheme = 'auto';const theme = saved === 'light' || saved === 'dark' || saved === 'auto' ? saved : defaultTheme;const isDark = theme === 'auto' ? preferDark : theme === 'dark';document.documentElement.classList.toggle('dark', isDark);document.documentElement.classList.toggle('rp-dark', isDark);document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';}</script>
+<link href="/druce-website/static/css/styles.d460345ad8.css" rel="stylesheet">
+<link rel="preload" href="/druce-website/static/js/async/route-1db6f4c72e92.4bae9baf84.js" as="script">
+<script defer src="/druce-website/static/js/styles.eb2f7d75e2.js"></script>
+<script defer src="/druce-website/static/js/lib-react.e90a3ceb3f.js"></script>
+<script defer src="/druce-website/static/js/lib-router.ac181ae5ed.js"></script>
+<script defer src="/druce-website/static/js/478.0f3f913849.js"></script>
+<script defer src="/druce-website/static/js/index.3aaf7b1b19.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Rspress v2.0.19">
+<meta property="og:type" content="website">
+<meta property="og:title" content="产品需求文档（精简版） - Druce">
+<meta name="description" content="AI 投研助手">
+<meta property="og:description" content="AI 投研助手"></head>
+
+  <body>
+    <div id="__rspress_root"><div class="rp-llms-hint" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);clip-path:inset(50%);white-space:nowrap;border:0">For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/初步报告生成PRD.md.</div><header class="rp-nav"><div class="rp-nav__left"><div class="rp-nav__title"><a href="/druce-website/" class="rp-nav__title__link rp-link"><span>Druce</span></a></div></div><div class="rp-nav__right"><button class="rp-search-button"><div class="rp-search-button__content"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21" class="rp-search-button__icon"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg><span class="rp-search-button__word">Search</span></div><div class="rp-search-button__hotkey" style="opacity:0"><span></span><span>K</span></div></button><div class="rp-search-button--mobile"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg></div><ul class="rp-nav-menu rp-nav-menu--right"><li class="rp-nav-menu__item"><a href="/druce-website/overview/index.html" class="rp-nav-menu__item__container rp-link">产品概览</a></li><li class="rp-nav-menu__item"><a href="/druce-website/features/index.html" class="rp-nav-menu__item__container rp-link">核心功能</a></li><li class="rp-nav-menu__item"><a href="/druce-website/architecture/index.html" class="rp-nav-menu__item__container rp-link">技术架构</a></li><li class="rp-nav-menu__item rp-nav-menu__item--active"><a href="/druce-website/初步报告生成PRD.html" class="rp-nav-menu__item__container rp-link">原始 PRD</a></li></ul><div class="rp-nav__others"><div class="rp-nav-menu__divider"></div><div class="rp-switch-appearance"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" class="rp-switch-appearance__icon rp-switch-appearance__icon--sun"><path fill="currentColor" d="m7.001 15.848-1.226 1.226a.58.58 0 0 0 0 .818.58.58 0 0 0 .818 0l1.226-1.226a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0m-.352-8.735a.584.584 0 0 0 .825-.825L6.237 5.051a.584.584 0 0 0-.825.825zM5.011 11.07h-1.75a.584.584 0 0 0 0 1.167h1.75c.324 0 .584-.26.584-.583a.585.585 0 0 0-.584-.584m7.003-5.835c.324 0 .584-.26.584-.584V2.9a.58.58 0 0 0-.584-.584.58.58 0 0 0-.583.583V4.65c0 .323.262.584.583.584m5.616 1.621 1.226-1.225a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0l-1.226 1.225a.58.58 0 0 0 0 .818.576.576 0 0 0 .818 0m3.138 4.214h-1.75a.58.58 0 0 0-.584.584c0 .324.26.584.583.584h1.751a.584.584 0 1 0 0-1.167m-3.389 5.124a.584.584 0 0 0-.825.825l1.238 1.238a.584.584 0 0 0 .825-.826zm-5.365-9.795a5.256 5.256 0 0 0-5.257 5.258 5.256 5.256 0 0 0 5.257 5.257 5.256 5.256 0 0 0 5.257-5.257 5.256 5.256 0 0 0-5.257-5.258m0 11.675a.58.58 0 0 0-.583.583v1.751a.582.582 0 1 0 1.167 0v-1.75a.584.584 0 0 0-.584-.584"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 19 19" class="rp-switch-appearance__icon rp-switch-appearance__icon--moon"><path fill="currentColor" d="M9.166 0a9.2 9.2 0 0 1 1.857.188.834.834 0 0 1 .042 1.623 4.47 4.47 0 1 0 5.457 5.457l.048-.135a.834.834 0 0 1 1.575.177q.186.902.188 1.856A9.168 9.168 0 1 1 9.166 0"></path></svg></div><div class="rp-social-links"><a href="https://github.com/RoooyHe/druct-website" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__sm"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg></button><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__md"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"><div class="rp-nav-menu__others-mobile__container"><div class="rp-nav-hamburger__md__hover-group"><div class="rp-nav-screen-appearance"><div class="rp-nav-screen-appearance__left">Theme</div><div class="rp-nav-screen-appearance__right"></div></div><div class="rp-nav-screen-divider"></div><div class="rp-social-links"><a href="https://github.com/RoooyHe/druct-website" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div></div></ul></button></div></header><div class="rp-doc-layout__menu"><div class="rp-sidebar-menu"><button type="button" class="rp-sidebar-menu__left"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M4 6h24v2H4zm0 18h24v2H4zm0-12h24v2H4zm0 6h24v2H4z"></path></svg><span>Menu</span></button><button type="button" class="rp-sidebar-menu__right"><span class="rp-sidebar-menu__right__text">ON THIS PAGE</span><svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-sidebar-menu__right__icon" style="transform:rotate(0deg);transition:transform 0.2s ease-out"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></button></div></div><div class="rp-doc-layout__container"><aside class="rp-doc-layout__sidebar rp-scrollbar"><a href="/druce-website/overview/index.html" class="rp-sidebar-item rp-sidebar-group rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">产品概览</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></a><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/overview/index.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">产品定位</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/overview/users.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">目标用户与场景</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/overview/scenarios.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">Demo 展示场景</span></div><div class="rp-sidebar-item__right"></div></a></div></div><a href="/druce-website/features/index.html" class="rp-sidebar-item rp-sidebar-group rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">核心功能</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></a><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/features/index.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">核心功能概览</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/features/acceptance.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">验收标准</span></div><div class="rp-sidebar-item__right"></div></a></div></div><a href="/druce-website/architecture/index.html" class="rp-sidebar-item rp-sidebar-group rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">技术架构</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></a><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/architecture/index.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">技术栈</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/architecture/data-flow.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">数据流</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/architecture/data-sources.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">数据来源策略</span></div><div class="rp-sidebar-item__right"></div></a></div></div><a href="/druce-website/初步报告生成PRD.html" class="rp-sidebar-item rp-sidebar-item--active rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">原始 PRD</span></div><div class="rp-sidebar-item__right"></div></a></aside><div class="rp-doc-layout__doc"><main class="rp-doc-layout__doc-container"><div class="rp-doc rspress-doc"><!--$--><h1 class="rp-toc-include" id="产品需求文档精简版"><a href="#产品需求文档精简版" class="rp-header-anchor rp-link" aria-hidden="true">#</a>产品需求文档（精简版）<!-- --> </h1><div class="rp-not-doc rp-llms-container"><button class="rp-not-doc rp-llms-button rp-llms-copy-button"><div class="rp-llms-copy-button__icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg></div><span>Copy Markdown</span></button><button class="rp-llms-button rp-llms-view-options__trigger "><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-llms-view-options__arrow "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button></div>
+<h2 class="rp-toc-include" id="ai投研助手---初步报告模块"><a href="#ai投研助手---初步报告模块" class="rp-header-anchor rp-link" aria-hidden="true">#</a>AI投研助手 - 初步报告模块</h2>
+<p><strong>版本</strong>：V1.0 | <strong>日期</strong>：2026.07.31 | <strong>状态</strong>：Demo阶段</p>
+<h2 class="rp-toc-include" id="一产品定位"><a href="#一产品定位" class="rp-header-anchor rp-link" aria-hidden="true">#</a>一、产品定位</h2>
+<p>面向投研人员的<strong>AI信息聚合工具</strong>，输入一个研究问题，自动执行多轮搜索、交叉验证，生成带引用链接的结构化报告。<strong>核心差异</strong>：支持批量接入私有数据（内部研报/纪要），而非仅依赖公开信息。</p>
+<p><strong>一句话卖点</strong>：花5分钟得到别人花5小时手动搜索才能凑齐的行业情报。</p>
+<h2 class="rp-toc-include" id="二目标用户与场景"><a href="#二目标用户与场景" class="rp-header-anchor rp-link" aria-hidden="true">#</a>二、目标用户与场景</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">用户</th><th style="text-align:left">场景</th><th style="text-align:left">核心诉求</th></tr></thead><tbody><tr><td style="text-align:left">买方研究员</td><td style="text-align:left">周报/晨会素材搜集</td><td style="text-align:left">快、广、可信</td></tr><tr><td style="text-align:left">投资经理</td><td style="text-align:left">验证个人判断框架</td><td style="text-align:left">私有数据融合、定制化分析</td></tr><tr><td style="text-align:left">个人投资者</td><td style="text-align:left">自选股盯盘与异动归因</td><td style="text-align:left">实时提醒、社区情绪监控</td></tr></tbody></table></div>
+<h2 class="rp-toc-include" id="三核心功能"><a href="#三核心功能" class="rp-header-anchor rp-link" aria-hidden="true">#</a>三、核心功能</h2>
+<h3 class="rp-toc-include" id="p0demo必做"><a href="#p0demo必做" class="rp-header-anchor rp-link" aria-hidden="true">#</a>P0（Demo必做）</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">功能</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:left">问题拆解</td><td style="text-align:left">将用户问题自动拆为3-5个子搜索词</td></tr><tr><td style="text-align:left">多轮联网搜索</td><td style="text-align:left">并行搜索，覆盖500-1000网页/次</td></tr><tr><td style="text-align:left">交叉验证</td><td style="text-align:left">同一观点至少2个独立信源，冲突则并列</td></tr><tr><td style="text-align:left">引用标注</td><td style="text-align:left">每个数据点标注来源+链接+时间，末尾附参考清单</td></tr><tr><td style="text-align:left">报告生成</td><td style="text-align:left">结构化输出（摘要→分点详述→风险提示→参考资料）</td></tr><tr><td style="text-align:left">私有数据上传</td><td style="text-align:left">支持上传PDF/Word，优先检索内部知识库</td></tr></tbody></table></div>
+<h2 class="rp-toc-include" id="四数据来源策略无金融api方案"><a href="#四数据来源策略无金融api方案" class="rp-header-anchor rp-link" aria-hidden="true">#</a>四、数据来源策略（无金融API方案）</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">类型</th><th style="text-align:left">来源</th><th style="text-align:left">获取方式</th></tr></thead><tbody><tr><td style="text-align:left">公开研报</td><td style="text-align:left">东方财富研报中心、雪球、格隆汇</td><td style="text-align:left">搜索引擎爬取</td></tr><tr><td style="text-align:left">公告/财报</td><td style="text-align:left">巨潮资讯网</td><td style="text-align:left">搜索引擎+PDF解析</td></tr><tr><td style="text-align:left">新闻资讯</td><td style="text-align:left">新浪财经、华尔街见闻</td><td style="text-align:left">搜索引擎</td></tr><tr><td style="text-align:left">私有数据</td><td style="text-align:left">用户上传PDF/Word</td><td style="text-align:left">本地RAG向量检索</td></tr><tr><td style="text-align:left">社区情绪</td><td style="text-align:left">雪球、东财股吧</td><td style="text-align:left">搜索引擎限定站点</td></tr></tbody></table></div>
+<h2 class="rp-toc-include" id="五技术栈"><a href="#五技术栈" class="rp-header-anchor rp-link" aria-hidden="true">#</a>五、技术栈</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">层</th><th style="text-align:left">选型</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:left">前端</td><td style="text-align:left">Streamlit</td><td style="text-align:left">快速Demo，无需前端开发</td></tr><tr><td style="text-align:left">Agent编排</td><td style="text-align:left">LangChain / MCP</td><td style="text-align:left">任务拆解、工具调度</td></tr><tr><td style="text-align:left">搜索</td><td style="text-align:left">Tavily API / Bing API</td><td style="text-align:left"><strong>不使用任何金融数据API</strong></td></tr><tr><td style="text-align:left">私有知识库</td><td style="text-align:left">Chroma + PyPDF</td><td style="text-align:left">向量检索+PDF解析</td></tr><tr><td style="text-align:left">LLM</td><td style="text-align:left">GPT-3.5-turbo / DeepSeek</td><td style="text-align:left">低成本，DeepSeek为OpenAI 1/10</td></tr><tr><td style="text-align:left">异步任务</td><td style="text-align:left">Celery + Redis（可选）</td><td style="text-align:left">长任务不阻塞界面</td></tr></tbody></table></div>
+<h2 class="rp-toc-include" id="六数据流核心流程"><a href="#六数据流核心流程" class="rp-header-anchor rp-link" aria-hidden="true">#</a>六、数据流（核心流程）</h2>
+<p>用户输入问题
+↓
+LLM拆解为3-5个子搜索词
+↓
+并行执行搜索（每词3-5条结果）
+↓
+合并搜索结果 + 用户私有数据（如有）
+↓
+LLM生成带引用的结构化报告
+↓
+前端展示 + 来源追溯</p>
+<h2 class="rp-toc-include" id="七验收标准"><a href="#七验收标准" class="rp-header-anchor rp-link" aria-hidden="true">#</a>七、验收标准</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">编号</th><th style="text-align:left">验收项</th><th style="text-align:left">标准</th></tr></thead><tbody><tr><td style="text-align:left">AC-01</td><td style="text-align:left">问题拆解</td><td style="text-align:left">自动生成≥3个子搜索词，用户可见</td></tr><tr><td style="text-align:left">AC-02</td><td style="text-align:left">信源数量</td><td style="text-align:left">每个观点至少2个独立来源</td></tr><tr><td style="text-align:left">AC-03</td><td style="text-align:left">引用规范</td><td style="text-align:left">所有引用含来源+链接+时间，无遗漏</td></tr><tr><td style="text-align:left">AC-04</td><td style="text-align:left">私有数据</td><td style="text-align:left">上传后优先引用内部资料，再补充公开信息</td></tr><tr><td style="text-align:left">AC-05</td><td style="text-align:left">响应时间</td><td style="text-align:left">单次报告≤15分钟</td></tr></tbody></table></div>
+<h2 class="rp-toc-include" id="八demo展示场景3个"><a href="#八demo展示场景3个" class="rp-header-anchor rp-link" aria-hidden="true">#</a>八、Demo展示场景（3个）</h2>
+<ol>
+<li>
+<p><strong>多源聚合</strong>：输入&quot;本周电子行业观点&quot;→ 展示搜索→交叉验证→带引用报告</p>
+</li>
+<li>
+<p><strong>私有数据优势</strong>：上传内部纪要 → 提问&quot;这家公司近期有无公开更新？&quot;→ 展示私有+公开融合回答</p>
+</li>
+<li>
+<p><strong>框架对齐</strong>：输入&quot;按巴菲特护城河框架，分析我自选股&quot;→ 展示按指定逻辑筛选点评</p>
+</li>
+</ol>
+<h2 class="rp-toc-include" id="九风险与应对"><a href="#九风险与应对" class="rp-header-anchor rp-link" aria-hidden="true">#</a>九、风险与应对</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th style="text-align:left">风险</th><th style="text-align:left">应对</th></tr></thead><tbody><tr><td style="text-align:left">搜索内容质量参差</td><td style="text-align:left">强制交叉验证，低权威信源标注&quot;非机构观点&quot;</td></tr><tr><td style="text-align:left">爬虫被封</td><td style="text-align:left">优先用搜索API，不硬爬特定站</td></tr><tr><td style="text-align:left">LLM幻觉/伪造来源</td><td style="text-align:left">Prompt强制&quot;无结果如实告知&quot;，后处理校验链接</td></tr></tbody></table></div><!--/$--></div><footer class="rp-doc-footer"><div class="rp-doc-footer__edit"></div><div class="rp-doc-footer__divider"></div><div class="rp-prev-next-page"><a href="/druce-website/architecture/data-sources.html" class="rp-prev-next-page__item rp-prev-next-page__prev rp-link"><span class="rp-prev-next-page__item__desc">Previous page</span><span class="rp-prev-next-page__item__title"><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-prev-next-page__icon rp-prev-next-page__rotate_180"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg><span>数据来源策略</span></span></a><div class="rp-prev-next-page__placeholder"></div></div></footer></main></div><aside class="rp-doc-layout__outline rp-scrollbar"><div class="rp-outline"><div class="rp-outline__title">ON THIS PAGE<svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg></div><nav class="rp-outline__toc rp-scrollbar"><a href="#ai投研助手---初步报告模块" class="rp-toc-item rp-link" title="AI投研助手 - 初步报告模块" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">AI投研助手 - 初步报告模块</span></a><a href="#一产品定位" class="rp-toc-item rp-link" title="一、产品定位" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">一、产品定位</span></a><a href="#二目标用户与场景" class="rp-toc-item rp-link" title="二、目标用户与场景" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">二、目标用户与场景</span></a><a href="#三核心功能" class="rp-toc-item rp-link" title="三、核心功能" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">三、核心功能</span></a><a href="#p0demo必做" class="rp-toc-item rp-link" title="P0（Demo必做）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">P0（Demo必做）</span></a><a href="#四数据来源策略无金融api方案" class="rp-toc-item rp-link" title="四、数据来源策略（无金融API方案）" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">四、数据来源策略（无金融API方案）</span></a><a href="#五技术栈" class="rp-toc-item rp-link" title="五、技术栈" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">五、技术栈</span></a><a href="#六数据流核心流程" class="rp-toc-item rp-link" title="六、数据流（核心流程）" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">六、数据流（核心流程）</span></a><a href="#七验收标准" class="rp-toc-item rp-link" title="七、验收标准" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">七、验收标准</span></a><a href="#八demo展示场景3个" class="rp-toc-item rp-link" title="八、Demo展示场景（3个）" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">八、Demo展示场景（3个）</span></a><a href="#九风险与应对" class="rp-toc-item rp-link" title="九、风险与应对" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">九、风险与应对</span></a></nav><div class="rp-outline__divider"></div><div class="rp-outline__bottom"></div></div></aside></div></div>
+    <div id="__rspress_modal_container"></div>
+  </body>
+</html>

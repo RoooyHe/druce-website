@@ -1,0 +1,26 @@
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/overview/index.md.
+
+# 产品定位
+
+面向投研人员的 **AI 信息聚合工具**，输入一个研究问题，自动执行多轮搜索、交叉验证，生成带引用链接的结构化报告。
+
+## 一句话卖点
+
+花 5 分钟得到别人花 5 小时手动搜索才能凑齐的行业情报。
+
+## 核心差异
+
+**支持批量接入私有数据（内部研报 / 纪要），而非仅依赖公开信息。**
+
+- 输入研究问题，自动完成搜索与验证
+- 结果带引用链接、来源时间，可追溯
+- 优先融合用户上传的内部资料
+
+## 本节页面
+
+| 页面                                                | 内容                      |
+| :------------------------------------------------ | :---------------------- |
+| [目标用户与场景](/druce-website/overview/users.md)       | 三类目标用户、典型使用场景与核心诉求      |
+| [Demo 展示场景](/druce-website/overview/scenarios.md) | Demo 阶段的 3 个核心展示场景及演示流程 |
+
+> 详细的产品愿景与差异化分析，参见 [原始 PRD](/druce-website/初步报告生成PRD.md)。

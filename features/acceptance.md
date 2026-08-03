@@ -1,0 +1,38 @@
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/features/acceptance.md.
+
+# 验收标准
+
+| 编号    | 验收项  | 标准                    |
+| :---- | :--- | :-------------------- |
+| AC-01 | 问题拆解 | 自动生成 ≥3 个子搜索词，用户可见    |
+| AC-02 | 信源数量 | 每个观点至少 2 个独立来源        |
+| AC-03 | 引用规范 | 所有引用含来源 + 链接 + 时间，无遗漏 |
+| AC-04 | 私有数据 | 上传后优先引用内部资料，再补充公开信息   |
+| AC-05 | 响应时间 | 单次报告 ≤ 15 分钟          |
+
+## 验收项说明
+
+### AC-01 问题拆解
+
+LLM 必须自动将用户问题拆解为至少 3 个子搜索词，且拆解过程对用户可见，
+便于人工校验和手动调整。
+
+### AC-02 信源数量
+
+报告中每一个观点都必须有至少 2 个独立信源相互印证。
+信源冲突时并列展示，不得擅自裁决或忽略冲突。
+
+### AC-03 引用规范
+
+报告中所有数据点必须完整标注来源、原文链接、发布时间，
+末尾附完整参考资料清单，无遗漏。
+
+### AC-04 私有数据
+
+用户上传内部资料后，系统必须优先引用内部资料，
+再补充公开信息作为佐证，而非相反。
+
+### AC-05 响应时间
+
+从用户提交问题到报告生成完成，单次任务总时长不超过 15 分钟。
+长任务通过异步机制（Celery + Redis）执行，不阻塞界面。

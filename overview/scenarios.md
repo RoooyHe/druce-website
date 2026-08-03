@@ -1,0 +1,33 @@
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/overview/scenarios.md.
+
+# Demo 展示场景（3 个）
+
+## 1. 多源聚合
+
+输入 **"本周电子行业观点"** → 展示搜索 → 交叉验证 → 带引用报告。
+
+演示要点：
+
+- 自动拆解为多个子搜索词
+- 多轮并行搜索，每词 3-5 条结果
+- 同一观点至少 2 个独立信源，冲突则并列展示
+
+## 2. 私有数据优势
+
+上传内部纪要 → 提问 **"这家公司近期有无公开更新？"** → 展示私有 + 公开融合回答。
+
+演示要点：
+
+- 上传 PDF / Word 内部资料
+- 优先引用内部资料，再补充公开信息
+- 报告中明确标注引用来源（私有 / 公开）
+
+## 3. 框架对齐
+
+输入 **"按巴菲特护城河框架，分析我自选股"** → 展示按指定逻辑筛选点评。
+
+演示要点：
+
+- 支持指定分析框架（巴菲特护城河、波特五力等）
+- 按框架维度输出分点详述
+- 框架维度缺失数据时如实告知
