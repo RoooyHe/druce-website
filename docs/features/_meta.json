@@ -1,0 +1,4 @@
+[
+  { "type": "file", "name": "index", "label": "核心功能概览" },
+  { "type": "file", "name": "acceptance", "label": "验收标准" }
+]

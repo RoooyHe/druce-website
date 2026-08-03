@@ -1,0 +1,6 @@
+[
+  { "text": "产品概览", "link": "/overview/", "activeMatch": "/overview/" },
+  { "text": "核心功能", "link": "/features/", "activeMatch": "/features/" },
+  { "text": "技术架构", "link": "/architecture/", "activeMatch": "/architecture/" },
+  { "text": "原始 PRD", "link": "/初步报告生成PRD", "activeMatch": "/初步报告生成PRD" }
+]

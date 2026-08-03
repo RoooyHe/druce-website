@@ -1,0 +1,5 @@
+[
+  { "type": "file", "name": "index", "label": "产品定位" },
+  { "type": "file", "name": "users", "label": "目标用户与场景" },
+  { "type": "file", "name": "scenarios", "label": "Demo 展示场景" }
+]

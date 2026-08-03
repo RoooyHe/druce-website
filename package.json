@@ -1,0 +1,23 @@
+{
+  "name": "druce-website",
+  "version": "0.0.1",
+  "description": "druce website",
+  "repository": {
+    "type": "git",
+    "url": "https://gitcode.com/druce-org/druce-website.git"
+  },
+  "license": "MIT",
+  "author": "RoyHe <roooyhe@163.com>",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "rspress dev",
+    "build": "rspress build",
+    "preview": "rspress preview",
+    "build:prod": "NODE_ENV=production rspress build"
+  },
+  "devDependencies": {
+    "@rspress/core": "^2.0.19",
+    "rspress-plugin-gh-pages": "^1.0.0"
+  }
+}
