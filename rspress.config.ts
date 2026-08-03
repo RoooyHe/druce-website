@@ -1,6 +1,7 @@
 // rspress.config.ts
 import { defineConfig } from "@rspress/core";
 import ghPages from "rspress-plugin-gh-pages";
+import mermaid from 'rspress-plugin-mermaid';
 
 export default defineConfig({
   root: "docs",
@@ -33,5 +34,6 @@ export default defineConfig({
       // 例如，仓库名为 'my-project'，则设置为 '/my-project/'
       siteBase: "/druce-website/",
     }),
+    mermaid()
   ],
 });

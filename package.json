@@ -13,11 +13,13 @@
   "scripts": {
     "dev": "rspress dev",
     "build": "rspress build",
-    "preview": "rspress preview",
-    "build:prod": "NODE_ENV=production rspress build"
+    "preview": "rspress preview"
   },
   "devDependencies": {
     "@rspress/core": "^2.0.19",
     "rspress-plugin-gh-pages": "^1.0.0"
+  },
+  "dependencies": {
+    "rspress-plugin-mermaid": "^1.0.1"
   }
 }

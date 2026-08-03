@@ -2,5 +2,6 @@
   { "type": "dir", "name": "overview", "label": "产品概览" },
   { "type": "dir", "name": "features", "label": "核心功能" },
   { "type": "dir", "name": "architecture", "label": "技术架构" },
+  { "type": "dir", "name": "development", "label": "开发指南" },
   { "type": "file", "name": "初步报告生成PRD", "label": "原始 PRD" }
 ]
