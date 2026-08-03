@@ -5,12 +5,12 @@
 <title>技术架构演进路线 - Druce</title>
 <script>{;const saved = localStorage.getItem('rspress-theme-appearance');const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;const defaultTheme = 'auto';const theme = saved === 'light' || saved === 'dark' || saved === 'auto' ? saved : defaultTheme;const isDark = theme === 'auto' ? preferDark : theme === 'dark';document.documentElement.classList.toggle('dark', isDark);document.documentElement.classList.toggle('rp-dark', isDark);document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';}</script>
 <link href="/druce-website/static/css/styles.d460345ad8.css" rel="stylesheet">
-<link rel="preload" href="/druce-website/static/js/async/route-955fa27a7247.9c02f9c4aa.js" as="script">
+<link rel="preload" href="/druce-website/static/js/async/route-955fa27a7247.5db4d18f5e.js" as="script">
 <script defer src="/druce-website/static/js/styles.2cc63ad49f.js"></script>
 <script defer src="/druce-website/static/js/lib-react.c1f7ec5b0c.js"></script>
 <script defer src="/druce-website/static/js/lib-router.7a7ade2827.js"></script>
 <script defer src="/druce-website/static/js/9478.6e664506cf.js"></script>
-<script defer src="/druce-website/static/js/index.a8ade8d856.js"></script>
+<script defer src="/druce-website/static/js/index.0cf15aef3d.js"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Rspress v2.0.19">
 <meta property="og:type" content="website">
@@ -80,20 +80,21 @@
 </ul>
 <h3 class="rp-toc-include" id="4-数据与任务层--异步状态持久化"><a href="#4-数据与任务层--异步状态持久化" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4. 数据与任务层 – 异步、状态持久化</h3>
 <ul>
-<li><strong>任务队列</strong>：Celery + Redis（必选，非可选）—— 理由与触发场景见 ADR-0002
+<li><strong>任务队列</strong>：<del>Celery + Redis</del> —— <strong>deprecated</strong>，详见 ADR-0002
 <ul>
-<li>长报告生成任务（15分钟内）拆分多个子任务组成 Chain/Group/Chord</li>
-<li>异步网页抓取、大文档解析入库均通过任务执行</li>
+<li>当前 <code>run_pipeline()</code> 同步链路实测 1-3 分钟，AC-05 的 15 分钟上限已达标</li>
+<li>任务队列抽象层对当前 Druce（单用户、1-3 分钟负载）属过度工程</li>
+<li>若未来负载真逼近 15 分钟（深搜、多跳、大私有语料），首选 <code>ThreadPoolExecutor</code> + SQLite task 表</li>
 </ul>
 </li>
 <li><strong>数据存储</strong>：
 <ul>
-<li>Redis：缓存热门查询结果、任务状态、用户会话临时数据</li>
+<li>Redis：原承担热门查询缓存 + 任务状态，deprecated 后不再引入</li>
 <li>PostgreSQL / SQLite：存储最终报告、用户配置、自选股列表、任务历史（Demo 阶段可用 SQLite，成熟后切换）</li>
 <li>向量数据库：Chroma 持久化模式，维护私有库索引</li>
 </ul>
 </li>
-<li><strong>定时调度</strong>：Celery Beat，用于个人投资者的定期社区监控与异动提醒</li>
+<li><strong>定时调度</strong>：主动感知（Celery Beat）的场景待澄清——若需定时监控社区情绪，可单点评估轻量调度方案，不绑 Celery+Redis</li>
 </ul>
 <h3 class="rp-toc-include" id="5-模型层--低成本多模型路由"><a href="#5-模型层--低成本多模型路由" class="rp-header-anchor rp-link" aria-hidden="true">#</a>5. 模型层 – 低成本、多模型路由</h3>
 <ul>
@@ -118,7 +119,6 @@
 </li>
 <li>结果存入 PostgreSQL，前端轮询到完成状态后拉取展示。</li>
 </ol>
-<hr/>
 <h2 class="rp-toc-include" id="与成熟-agent-的核心差距"><a href="#与成熟-agent-的核心差距" class="rp-header-anchor rp-link" aria-hidden="true">#</a>与成熟 Agent 的核心差距</h2>
 <p>当前选型虽能快速验证业务，但距离 7x24 生产级、高可靠、可演进的成熟 Agent 存在以下关键短板。每项标注归类：</p>
 <ul>
@@ -202,14 +202,6 @@
 </ul>
 </li>
 <li>
-<p><strong>异步队列 Celery + Redis</strong>  —— 真需求，两场景触发</p>
-<ul>
-<li>AC-05 长报告：单次逼近 15 分钟，同步执行会卡死 Streamlit</li>
-<li>主动感知定时任务：Celery Beat 周期监控社区情绪，本身依赖 Celery</li>
-<li>详见 ADR-0002</li>
-</ul>
-</li>
-<li>
 <p><strong>多模态文档解析</strong>  —— 真差距，从原步骤 5 提级</p>
 <ul>
 <li>Unstructured.io + GPT-4V 解析图表、支持 <code>.docx</code> / <code>.xlsx</code></li>
@@ -220,13 +212,18 @@
 <li>
 <p><strong>主动感知与推送</strong>  —— 真差距，从原步骤 5 提级</p>
 <ul>
-<li>Celery Beat 定时监控 + WebSocket / 邮件 / 微信推送</li>
+<li>定时监控社区情绪 + WebSocket / 邮件 / 微信推送</li>
 <li>对应 PRD 个人投资者&quot;实时提醒、社区情绪监控&quot;场景</li>
-<li>依赖步骤 2 的 Celery 基础设施</li>
+<li>调度方案单点评估（轻量定时器即可，不绑 Celery+Redis）</li>
 <li>详见 CONTEXT.md「主动感知与推送」条目</li>
 </ul>
 </li>
 </ol>
+<blockquote>
+<p><strong>已废弃</strong>：原步骤 2「异步队列 Celery + Redis」已 deprecated。
+AC-05 的 15 分钟上限由当前同步链路（实测 1-3 分钟）满足，异步队列对单用户、1-3 分钟负载属过度工程。
+详见 ADR-0002 与 CONTEXT.md「异步执行」条目。</p>
+</blockquote>
 <p>上述路径只列<strong>跨越交付边界</strong>的必补项。通用 Agent 模板带来的项（多用户隔离、越狱检测、语义缓存、对话记忆持久化）不在此列——它们对投研初步报告场景低收益或过度，详见 <code>CONTEXT.md</code> 各条目与 <code>docs/adr/</code>。</p>
 <blockquote>
 <p>技术栈总览参见 <a href="/druce-website/architecture/index.html" class="rp-link">技术栈</a>，核心流程参见 <a href="/druce-website/architecture/data-flow.html" class="rp-link">数据流</a>。
