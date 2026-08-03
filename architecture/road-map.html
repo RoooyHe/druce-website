@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>技术架构演进路线 - Druce</title>
+<script>{;const saved = localStorage.getItem('rspress-theme-appearance');const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;const defaultTheme = 'auto';const theme = saved === 'light' || saved === 'dark' || saved === 'auto' ? saved : defaultTheme;const isDark = theme === 'auto' ? preferDark : theme === 'dark';document.documentElement.classList.toggle('dark', isDark);document.documentElement.classList.toggle('rp-dark', isDark);document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';}</script>
+<link href="/druce-website/static/css/styles.d460345ad8.css" rel="stylesheet">
+<link rel="preload" href="/druce-website/static/js/async/route-955fa27a7247.6e5f574769.js" as="script">
+<script defer src="/druce-website/static/js/styles.eb2f7d75e2.js"></script>
+<script defer src="/druce-website/static/js/lib-react.e90a3ceb3f.js"></script>
+<script defer src="/druce-website/static/js/lib-router.ac181ae5ed.js"></script>
+<script defer src="/druce-website/static/js/478.f19fd79e7f.js"></script>
+<script defer src="/druce-website/static/js/index.97f7798f53.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Rspress v2.0.19">
+<meta property="og:type" content="website">
+<meta property="og:title" content="技术架构演进路线 - Druce">
+<meta name="description" content="从当前 Demo 架构到生产级系统的五层架构细化、核心差距分析与演进路径规划。">
+<meta property="og:description" content="从当前 Demo 架构到生产级系统的五层架构细化、核心差距分析与演进路径规划。"></head>
+
+  <body>
+    <div id="__rspress_root"><div class="rp-llms-hint" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);clip-path:inset(50%);white-space:nowrap;border:0">For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/architecture/road-map.md.</div><header class="rp-nav"><div class="rp-nav__left"><div class="rp-nav__title"><a href="/druce-website/" class="rp-nav__title__link rp-link"><span>Druce</span></a></div></div><div class="rp-nav__right"><button class="rp-search-button"><div class="rp-search-button__content"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21" class="rp-search-button__icon"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg><span class="rp-search-button__word">Search</span></div><div class="rp-search-button__hotkey" style="opacity:0"><span></span><span>K</span></div></button><div class="rp-search-button--mobile"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg></div><ul class="rp-nav-menu rp-nav-menu--right"><li class="rp-nav-menu__item"><a href="/druce-website/overview/index.html" class="rp-nav-menu__item__container rp-link">产品概览</a></li><li class="rp-nav-menu__item"><a href="/druce-website/features/index.html" class="rp-nav-menu__item__container rp-link">核心功能</a></li><li class="rp-nav-menu__item rp-nav-menu__item--active"><a href="/druce-website/architecture/index.html" class="rp-nav-menu__item__container rp-link">技术架构</a></li><li class="rp-nav-menu__item"><a href="/druce-website/development/index.html" class="rp-nav-menu__item__container rp-link">开发指南</a></li><li class="rp-nav-menu__item"><a href="/druce-website/初步报告生成PRD.html" class="rp-nav-menu__item__container rp-link">原始 PRD</a></li></ul><div class="rp-nav__others"><div class="rp-nav-menu__divider"></div><div class="rp-switch-appearance"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" class="rp-switch-appearance__icon rp-switch-appearance__icon--sun"><path fill="currentColor" d="m7.001 15.848-1.226 1.226a.58.58 0 0 0 0 .818.58.58 0 0 0 .818 0l1.226-1.226a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0m-.352-8.735a.584.584 0 0 0 .825-.825L6.237 5.051a.584.584 0 0 0-.825.825zM5.011 11.07h-1.75a.584.584 0 0 0 0 1.167h1.75c.324 0 .584-.26.584-.583a.585.585 0 0 0-.584-.584m7.003-5.835c.324 0 .584-.26.584-.584V2.9a.58.58 0 0 0-.584-.584.58.58 0 0 0-.583.583V4.65c0 .323.262.584.583.584m5.616 1.621 1.226-1.225a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0l-1.226 1.225a.58.58 0 0 0 0 .818.576.576 0 0 0 .818 0m3.138 4.214h-1.75a.58.58 0 0 0-.584.584c0 .324.26.584.583.584h1.751a.584.584 0 1 0 0-1.167m-3.389 5.124a.584.584 0 0 0-.825.825l1.238 1.238a.584.584 0 0 0 .825-.826zm-5.365-9.795a5.256 5.256 0 0 0-5.257 5.258 5.256 5.256 0 0 0 5.257 5.257 5.256 5.256 0 0 0 5.257-5.257 5.256 5.256 0 0 0-5.257-5.258m0 11.675a.58.58 0 0 0-.583.583v1.751a.582.582 0 1 0 1.167 0v-1.75a.584.584 0 0 0-.584-.584"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 19 19" class="rp-switch-appearance__icon rp-switch-appearance__icon--moon"><path fill="currentColor" d="M9.166 0a9.2 9.2 0 0 1 1.857.188.834.834 0 0 1 .042 1.623 4.47 4.47 0 1 0 5.457 5.457l.048-.135a.834.834 0 0 1 1.575.177q.186.902.188 1.856A9.168 9.168 0 1 1 9.166 0"></path></svg></div><div class="rp-social-links"><a href="https://github.com/RoooyHe/druct-website" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__sm"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg></button><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__md"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"><div class="rp-nav-menu__others-mobile__container"><div class="rp-nav-hamburger__md__hover-group"><div class="rp-nav-screen-appearance"><div class="rp-nav-screen-appearance__left">Theme</div><div class="rp-nav-screen-appearance__right"></div></div><div class="rp-nav-screen-divider"></div><div class="rp-social-links"><a href="https://github.com/RoooyHe/druct-website" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div></div></ul></button></div></header><div class="rp-doc-layout__menu"><div class="rp-sidebar-menu"><button type="button" class="rp-sidebar-menu__left"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M4 6h24v2H4zm0 18h24v2H4zm0-12h24v2H4zm0 6h24v2H4z"></path></svg><span>Menu</span></button><button type="button" class="rp-sidebar-menu__right"><span class="rp-sidebar-menu__right__text">ON THIS PAGE</span><svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-sidebar-menu__right__icon" style="transform:rotate(0deg);transition:transform 0.2s ease-out"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></button></div></div><div class="rp-doc-layout__container"><aside class="rp-doc-layout__sidebar rp-scrollbar"><a href="/druce-website/overview/index.html" class="rp-sidebar-item rp-sidebar-group rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">产品概览</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></a><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/overview/index.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">产品定位</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/overview/users.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">目标用户与场景</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/overview/scenarios.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">Demo 展示场景</span></div><div class="rp-sidebar-item__right"></div></a></div></div><a href="/druce-website/features/index.html" class="rp-sidebar-item rp-sidebar-group rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">核心功能</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></a><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/features/index.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">核心功能概览</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/features/acceptance.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">验收标准</span></div><div class="rp-sidebar-item__right"></div></a></div></div><a href="/druce-website/architecture/index.html" class="rp-sidebar-item rp-sidebar-group rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">技术架构</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></a><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/architecture/index.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">技术栈</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/architecture/data-flow.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">数据流</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/architecture/data-sources.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">数据来源策略</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/architecture/road-map.html" class="rp-sidebar-item rp-sidebar-item--active rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">演进路线</span></div><div class="rp-sidebar-item__right"></div></a></div></div><a href="/druce-website/初步报告生成PRD.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">原始 PRD</span></div><div class="rp-sidebar-item__right"></div></a></aside><div class="rp-doc-layout__doc"><main class="rp-doc-layout__doc-container"><div class="rp-doc rspress-doc"><!--$--><p>基于你的业务场景和技术选型，以下提供细化的分层技术架构，并明确指出当前选型与生产级成熟 Agent 之间的核心差距。</p>
+<hr/>
+<h1 class="rp-toc-include" id="技术架构演进路线"><a href="#技术架构演进路线" class="rp-header-anchor rp-link" aria-hidden="true">#</a>技术架构演进路线<!-- --> </h1><div class="rp-not-doc rp-llms-container"><button class="rp-not-doc rp-llms-button rp-llms-copy-button"><div class="rp-llms-copy-button__icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg></div><span>Copy Markdown</span></button><button class="rp-llms-button rp-llms-view-options__trigger "><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-llms-view-options__arrow "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button></div>
+<p>整个系统可拆分为 <strong>五层逻辑架构</strong>，从用户交互到数据持久化逐层贯通。</p>
+<h3 class="rp-toc-include" id="1-表现层--交互与任务管理"><a href="#1-表现层--交互与任务管理" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1. 表现层 – 交互与任务管理</h3>
+<ul>
+<li><strong>核心组件</strong>：Streamlit</li>
+<li><strong>承担职责</strong>：
+<ul>
+<li>多角色工作台（买方研究员/投资经理/个人投资者切换不同视图）</li>
+<li>异步任务提交与进度轮询（通过轮询 Celery 任务状态或 WebSocket 回调）</li>
+<li>报告结果渲染（Markdown/表格/情绪曲线/来源链接）</li>
+</ul>
+</li>
+<li><strong>关键设计</strong>：
+<ul>
+<li>用 <code>session_state</code> 维护会话内的临时状态（如当前自选股列表、上传的文件暂存路径）</li>
+<li>与后端通过 RESTful API（由 FastAPI 轻量包裹）交互，解耦 Streamlit 与核心逻辑</li>
+</ul>
+</li>
+</ul>
+<h3 class="rp-toc-include" id="2-agent-编排层--任务理解与调度"><a href="#2-agent-编排层--任务理解与调度" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2. Agent 编排层 – 任务理解与调度</h3>
+<ul>
+<li><strong>核心框架</strong>：LangChain（LangGraph 扩展）+ MCP 协议</li>
+<li><strong>内部模块</strong>：
+<ul>
+<li><strong>意图路由器</strong>：根据用户输入分类（广域搜集/私有库问答/社区监控），选择不同 Agent 分支</li>
+<li><strong>规划器（Planner）</strong>：将复杂查询拆分为 Plan-and-Execute 步骤，如“先搜行业总览 → 再搜头部公司动态 → 最后交叉验证关键数据”</li>
+<li><strong>执行器（Executor）</strong>：调用工具并管理上下文窗口，使用 <code>ReAct</code> 或 <code>OpenAI Functions</code> 模式</li>
+<li><strong>验证器</strong>：对搜索结果的来源多样性、时效性、一致性做自动检查，触发补充搜索</li>
+<li><strong>MCP 服务端/客户端</strong>：将搜索工具、知识库检索、文件解析等封装为标准 MCP 接口，方便工具热插拔</li>
+</ul>
+</li>
+</ul>
+<h3 class="rp-toc-include" id="3-工具层--外部能力抽象"><a href="#3-工具层--外部能力抽象" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3. 工具层 – 外部能力抽象</h3>
+<ul>
+<li><strong>联网搜索工具</strong>：Tavily API / Bing API 封装，支持 <code>site:</code> 语法、日期过滤器、递归深度控制
+<ul>
+<li>增加<strong>网页正文抓取适配器</strong>：对摘要不全的链接，使用 <code>playwright</code> 异步无头浏览器获取全文（需纳入 Celery 异步执行）</li>
+<li>内建<strong>去重与降噪管道</strong>：URL 指纹去重、内容相似度去重（SimHash）、低质站点黑名单</li>
+</ul>
+</li>
+<li><strong>私有知识库工具</strong>：Chroma + PyPDF + 文本分割器
+<ul>
+<li>支持 <strong>父子文档检索</strong>（Parent Document Retriever）：用小颗粒度检索，返回大颗粒度上下文，保证连贯性</li>
+<li>元数据过滤：可依文件来源、日期、研究员筛选</li>
+<li>检索后重排序（Reranker）：用轻量 Cross-Encoder 模型提升相关性</li>
+</ul>
+</li>
+<li><strong>社区情绪工具</strong>：指定站点抓取 + 情感提取管道
+<ul>
+<li>封装为“获取雪球热帖”、“提取东财股吧情绪”等工具，返回结构化 JSON（情绪分数、关键词云、异动归因）</li>
+</ul>
+</li>
+</ul>
+<h3 class="rp-toc-include" id="4-数据与任务层--异步状态持久化"><a href="#4-数据与任务层--异步状态持久化" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4. 数据与任务层 – 异步、状态持久化</h3>
+<ul>
+<li><strong>任务队列</strong>：Celery + Redis（必选，非可选）
+<ul>
+<li>长报告生成任务（15分钟内）拆分多个子任务组成 Chain/Group/Chord</li>
+<li>异步网页抓取、大文档解析入库均通过任务执行</li>
+</ul>
+</li>
+<li><strong>数据存储</strong>：
+<ul>
+<li>Redis：缓存热门查询结果、任务状态、用户会话临时数据</li>
+<li>PostgreSQL / SQLite：存储最终报告、用户配置、自选股列表、任务历史（Demo 阶段可用 SQLite，成熟后切换）</li>
+<li>向量数据库：Chroma 持久化模式，维护私有库索引</li>
+</ul>
+</li>
+<li><strong>定时调度</strong>：Celery Beat，用于个人投资者的定期社区监控与异动提醒</li>
+</ul>
+<h3 class="rp-toc-include" id="5-模型层--低成本多模型路由"><a href="#5-模型层--低成本多模型路由" class="rp-header-anchor rp-link" aria-hidden="true">#</a>5. 模型层 – 低成本、多模型路由</h3>
+<ul>
+<li><strong>默认模型</strong>：DeepSeek（更优中文能力，成本极低，作为主力）</li>
+<li><strong>备选路由</strong>：当 DeepSeek 不可用时自动降级至 GPT-3.5-turbo</li>
+<li><strong>模型专用适配</strong>：为情感分析、摘要、报告生成等任务编写不同的 System Prompt 模板，保持输出一致</li>
+</ul>
+<h3 class="rp-toc-include" id="整体数据流示例买方研究员生成周报"><a href="#整体数据流示例买方研究员生成周报" class="rp-header-anchor rp-link" aria-hidden="true">#</a>整体数据流示例（买方研究员生成周报）</h3>
+<ol>
+<li>用户在 Streamlit 输入“生成新能源汽车行业本周动态周报”。</li>
+<li>前端将任务提交至 Celery，返回 <code>task_id</code>，界面进入轮询。</li>
+<li>Worker 中 Agent 规划步骤：
+<ul>
+<li>并行搜索“新能源汽车 本周 政策” “销量 周报” “头部公司 动态” 等 6 个方向</li>
+<li>对搜索结果去重、抓取正文、LLM 摘要提取关键信息</li>
+<li>合并信息，交叉验证事实，发现矛盾则追加搜索</li>
+<li>调用模板生成结构化周报（Markdown）</li>
+</ul>
+</li>
+<li>结果存入 PostgreSQL，前端轮询到完成状态后拉取展示。</li>
+</ol>
+<hr/>
+<h2 class="rp-toc-include" id="与成熟-agent-的核心差距"><a href="#与成熟-agent-的核心差距" class="rp-header-anchor rp-link" aria-hidden="true">#</a>与成熟 Agent 的核心差距</h2>
+<p>当前选型虽能快速验证业务，但距离 7x24 生产级、高可靠、可演进的成熟 Agent 存在以下关键短板：</p>
+<h3 class="rp-toc-include" id="1-状态与记忆"><a href="#1-状态与记忆" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1. 状态与记忆</h3>
+<ul>
+<li><strong>现状</strong>：Streamlit <code>session_state</code> 仅维持单次会话，无长期记忆。Agent 每次对话独立，不记得上次搜索偏好或用户身份。</li>
+<li><strong>差距</strong>：成熟 Agent 需要持久化的用户画像、对话历史、搜索偏好，并能根据历史交互主动调整策略。需引入对话数据库与记忆管理模块（LangChain 的 Memory 结合持久化存储）。</li>
+</ul>
+<h3 class="rp-toc-include" id="2-多用户与隔离"><a href="#2-多用户与隔离" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2. 多用户与隔离</h3>
+<ul>
+<li><strong>现状</strong>：单机 Chroma 与 Celery 默认单用户运行，多用户时知识库文件、任务队列、API 密钥完全共享。</li>
+<li><strong>差距</strong>：需要租户隔离：每个用户/团队的私有知识库独立索引，任务队列需按用户分流，计费与 API 配额按用户管控。必须加入用户认证与授权层（如 JWT + 角色控制）。</li>
+</ul>
+<h3 class="rp-toc-include" id="3-工具可靠性--错误自愈"><a href="#3-工具可靠性--错误自愈" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3. 工具可靠性 &amp; 错误自愈</h3>
+<ul>
+<li><strong>现状</strong>：搜索 API 可能限流、目标网站反爬导致抓取失败、PDF 解析出错，当前缺乏系统级容错。</li>
+<li><strong>差距</strong>：成熟 Agent 需实现：
+<ul>
+<li>指数退避重试、断路器模式，防止级联失败</li>
+<li>工具降级：Bing API 不可用时自动切换 Tavily</li>
+<li>异常捕获结构化，将错误作为观测信号反馈给规划器</li>
+</ul>
+</li>
+</ul>
+<h3 class="rp-toc-include" id="4-可观测性与评估"><a href="#4-可观测性与评估" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4. 可观测性与评估</h3>
+<ul>
+<li><strong>现状</strong>：无日志聚合、无 Trace，排查 Agent 决策链困难。LLM 输出质量无量化评估。</li>
+<li><strong>差距</strong>：必须建立 LLM 可观测性栈（如 LangSmith、LangFuse），记录每一步的 prompt、工具调用、响应时间。同时建立离线评估数据集（黄金问答集），用于回归测试 prompt 变更是否退化。</li>
+</ul>
+<h3 class="rp-toc-include" id="5-安全与护栏"><a href="#5-安全与护栏" class="rp-header-anchor rp-link" aria-hidden="true">#</a>5. 安全与护栏</h3>
+<ul>
+<li><strong>现状</strong>：用户可直接嵌入越狱提示词、要求系统执行任意搜索，可能产生有害输出或无节制调用 API。</li>
+<li><strong>差距</strong>：需要输入/输出安全护栏：
+<ul>
+<li>输入检测：敏感主题阻断、注入攻击防御</li>
+<li>输出审计：金融合规检查（如声明“不构成投资建议”）、杜绝诽谤性内容</li>
+<li>工具层权限最小化：禁止访问内网、限制爬虫并发数</li>
+</ul>
+</li>
+</ul>
+<h3 class="rp-toc-include" id="6-复杂文档理解"><a href="#6-复杂文档理解" class="rp-header-anchor rp-link" aria-hidden="true">#</a>6. 复杂文档理解</h3>
+<ul>
+<li><strong>现状</strong>：仅 PyPDF 处理文本型 PDF，对财报中的表格、扫描件、图表无法理解。</li>
+<li><strong>差距</strong>：成熟 Agent 需引入多模态文档解析（如 Unstructured.io + GPT-4V 解析图表），并支持 <code>.docx</code>、<code>.xlsx</code> 等格式，才能处理真正的内部研报。</li>
+</ul>
+<h3 class="rp-toc-include" id="7-主动感知与推送"><a href="#7-主动感知与推送" class="rp-header-anchor rp-link" aria-hidden="true">#</a>7. 主动感知与推送</h3>
+<ul>
+<li><strong>现状</strong>：个人投资者需求需要实时提醒，目前依赖前端轮询或人工触发。</li>
+<li><strong>差距</strong>：需要事件驱动架构，通过 Celery Beat 定时执行监控任务，一旦社区情绪异动（如突发暴跌讨论），通过 WebSocket 或消息推送（邮件/微信）实时通知用户。</li>
+</ul>
+<h3 class="rp-toc-include" id="8-成本与性能可控"><a href="#8-成本与性能可控" class="rp-header-anchor rp-link" aria-hidden="true">#</a>8. 成本与性能可控</h3>
+<ul>
+<li><strong>现状</strong>：无 Token 用量追踪，无法按任务类型限流，高并发下极易耗尽预算或触发 API 限流。</li>
+<li><strong>差距</strong>：加入成本跟踪器（统计每次调用的 Token 消费），设置单用户/单日预算上限，并对热门查询做语义缓存（Cache 之前的 LLM 响应），大幅降低重复成本。</li>
+</ul>
+<hr/>
+<h2 class="rp-toc-include" id="演进路径建议"><a href="#演进路径建议" class="rp-header-anchor rp-link" aria-hidden="true">#</a>演进路径建议</h2>
+<p>Demo 验证后，需逐步将“玩具级”Agent 加固为“生产级”系统，优先级建议：</p>
+<ol>
+<li><strong>可观测性与成本控制</strong>（立即引入 LangFuse 追踪 + 缓存）</li>
+<li><strong>任务与记忆持久化</strong>（PostgreSQL 替代 SQLite，增加对话历史）</li>
+<li><strong>多用户隔离与认证</strong>（简易登录 + 按用户索引分隔）</li>
+<li><strong>工具可靠性与安全护栏</strong>（重试机制 + 输入/输出审核）</li>
+<li><strong>多模态文档与主动推送</strong>（按需扩展）</li>
+</ol>
+<p>这些差距正是 Demo 和可交付的成熟 Agent 产品之间的分水岭。当前选型正确，但必须在架构演进中逐项补齐，才能支撑起持续、稳定、可信的金融研究服务。</p>
+<blockquote>
+<p>技术栈总览参见 <a href="/druce-website/architecture/index.html" class="rp-link">技术栈</a>，核心流程参见 <a href="/druce-website/architecture/data-flow.html" class="rp-link">数据流</a>。</p>
+</blockquote><!--/$--></div><footer class="rp-doc-footer"><div class="rp-doc-footer__edit"></div><div class="rp-doc-footer__divider"></div><div class="rp-prev-next-page"><a href="/druce-website/architecture/data-sources.html" class="rp-prev-next-page__item rp-prev-next-page__prev rp-link"><span class="rp-prev-next-page__item__desc">Previous page</span><span class="rp-prev-next-page__item__title"><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-prev-next-page__icon rp-prev-next-page__rotate_180"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg><span>数据来源策略</span></span></a><a href="/druce-website/初步报告生成PRD.html" class="rp-prev-next-page__item rp-prev-next-page__next rp-link"><span class="rp-prev-next-page__item__desc">Next page</span><span class="rp-prev-next-page__item__title"><span>原始 PRD</span><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-prev-next-page__icon"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></span></a></div></footer></main></div><aside class="rp-doc-layout__outline rp-scrollbar"><div class="rp-outline"><div class="rp-outline__title">ON THIS PAGE<svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg></div><nav class="rp-outline__toc rp-scrollbar"><a href="#1-表现层--交互与任务管理" class="rp-toc-item rp-link" title="1. 表现层 – 交互与任务管理" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">1. 表现层 – 交互与任务管理</span></a><a href="#2-agent-编排层--任务理解与调度" class="rp-toc-item rp-link" title="2. Agent 编排层 – 任务理解与调度" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2. Agent 编排层 – 任务理解与调度</span></a><a href="#3-工具层--外部能力抽象" class="rp-toc-item rp-link" title="3. 工具层 – 外部能力抽象" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3. 工具层 – 外部能力抽象</span></a><a href="#4-数据与任务层--异步状态持久化" class="rp-toc-item rp-link" title="4. 数据与任务层 – 异步、状态持久化" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4. 数据与任务层 – 异步、状态持久化</span></a><a href="#5-模型层--低成本多模型路由" class="rp-toc-item rp-link" title="5. 模型层 – 低成本、多模型路由" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">5. 模型层 – 低成本、多模型路由</span></a><a href="#整体数据流示例买方研究员生成周报" class="rp-toc-item rp-link" title="整体数据流示例（买方研究员生成周报）" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">整体数据流示例（买方研究员生成周报）</span></a><a href="#与成熟-agent-的核心差距" class="rp-toc-item rp-link" title="与成熟 Agent 的核心差距" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">与成熟 Agent 的核心差距</span></a><a href="#1-状态与记忆" class="rp-toc-item rp-link" title="1. 状态与记忆" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">1. 状态与记忆</span></a><a href="#2-多用户与隔离" class="rp-toc-item rp-link" title="2. 多用户与隔离" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2. 多用户与隔离</span></a><a href="#3-工具可靠性--错误自愈" class="rp-toc-item rp-link" title="3. 工具可靠性 &amp; 错误自愈" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3. 工具可靠性 &amp; 错误自愈</span></a><a href="#4-可观测性与评估" class="rp-toc-item rp-link" title="4. 可观测性与评估" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">4. 可观测性与评估</span></a><a href="#5-安全与护栏" class="rp-toc-item rp-link" title="5. 安全与护栏" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">5. 安全与护栏</span></a><a href="#6-复杂文档理解" class="rp-toc-item rp-link" title="6. 复杂文档理解" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">6. 复杂文档理解</span></a><a href="#7-主动感知与推送" class="rp-toc-item rp-link" title="7. 主动感知与推送" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">7. 主动感知与推送</span></a><a href="#8-成本与性能可控" class="rp-toc-item rp-link" title="8. 成本与性能可控" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">8. 成本与性能可控</span></a><a href="#演进路径建议" class="rp-toc-item rp-link" title="演进路径建议" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">演进路径建议</span></a></nav><div class="rp-outline__divider"></div><div class="rp-outline__bottom"></div></div></aside></div></div>
+    <div id="__rspress_modal_container"></div>
+  </body>
+</html>

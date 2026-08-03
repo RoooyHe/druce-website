@@ -51,5 +51,6 @@ Demo 阶段优先低成本方案：
 | :---------------------------------------------------- | :------------------- |
 | [数据流](/druce-website/architecture/data-flow.md)       | 从用户输入到报告生成的 6 节点核心流程 |
 | [数据来源策略](/druce-website/architecture/data-sources.md) | 无金融 API 方案下的 5 类数据来源 |
+| [演进路线](/druce-website/architecture/road-map.md)       | 五层架构细化、核心差距分析与演进路径规划 |
 
 > 相关数据流程参见 [数据流](/druce-website/architecture/data-flow.md)。

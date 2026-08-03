@@ -6,7 +6,7 @@ Druce
 
 > 花五分钟得到别人花五小时手动搜索才能凑齐的行业情报
 
-[产品概览](/overview/) | [核心功能](/features/)
+[产品概览](/overview/) | [核心功能](/features/) | [快速开始](/development/getting-started)
 
 ## Features
 

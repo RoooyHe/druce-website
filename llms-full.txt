@@ -280,6 +280,7 @@ Demo 阶段优先低成本方案：
 | :---------------------------------------------------- | :------------------- |
 | [数据流](/druce-website/architecture/data-flow.md)       | 从用户输入到报告生成的 6 节点核心流程 |
 | [数据来源策略](/druce-website/architecture/data-sources.md) | 无金融 API 方案下的 5 类数据来源 |
+| [演进路线](/druce-website/architecture/road-map.md)       | 五层架构细化、核心差距分析与演进路径规划 |
 
 > 相关数据流程参见 [数据流](/druce-website/architecture/data-flow.md)。
 
@@ -391,6 +392,495 @@ PyPDF 负责公告 PDF 的文本解析。
 聚合雪球、东财股吧等社区的情绪数据，辅助判断市场情绪。
 
 > 风险与应对策略详见 [原始 PRD](/druce-website/初步报告生成PRD.md) 第九节。
+
+
+
+---
+url: /druce-website/architecture/road-map.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/architecture/road-map.md.
+
+基于你的业务场景和技术选型，以下提供细化的分层技术架构，并明确指出当前选型与生产级成熟 Agent 之间的核心差距。
+
+***
+
+# 技术架构演进路线
+
+整个系统可拆分为 **五层逻辑架构**，从用户交互到数据持久化逐层贯通。
+
+### 1. 表现层 – 交互与任务管理
+
+- **核心组件**：Streamlit
+- **承担职责**：
+  - 多角色工作台（买方研究员/投资经理/个人投资者切换不同视图）
+  - 异步任务提交与进度轮询（通过轮询 Celery 任务状态或 WebSocket 回调）
+  - 报告结果渲染（Markdown/表格/情绪曲线/来源链接）
+- **关键设计**：
+  - 用 `session_state` 维护会话内的临时状态（如当前自选股列表、上传的文件暂存路径）
+  - 与后端通过 RESTful API（由 FastAPI 轻量包裹）交互，解耦 Streamlit 与核心逻辑
+
+### 2. Agent 编排层 – 任务理解与调度
+
+- **核心框架**：LangChain（LangGraph 扩展）+ MCP 协议
+- **内部模块**：
+  - **意图路由器**：根据用户输入分类（广域搜集/私有库问答/社区监控），选择不同 Agent 分支
+  - **规划器（Planner）**：将复杂查询拆分为 Plan-and-Execute 步骤，如“先搜行业总览 → 再搜头部公司动态 → 最后交叉验证关键数据”
+  - **执行器（Executor）**：调用工具并管理上下文窗口，使用 `ReAct` 或 `OpenAI Functions` 模式
+  - **验证器**：对搜索结果的来源多样性、时效性、一致性做自动检查，触发补充搜索
+  - **MCP 服务端/客户端**：将搜索工具、知识库检索、文件解析等封装为标准 MCP 接口，方便工具热插拔
+
+### 3. 工具层 – 外部能力抽象
+
+- **联网搜索工具**：Tavily API / Bing API 封装，支持 `site:` 语法、日期过滤器、递归深度控制
+  - 增加**网页正文抓取适配器**：对摘要不全的链接，使用 `playwright` 异步无头浏览器获取全文（需纳入 Celery 异步执行）
+  - 内建**去重与降噪管道**：URL 指纹去重、内容相似度去重（SimHash）、低质站点黑名单
+- **私有知识库工具**：Chroma + PyPDF + 文本分割器
+  - 支持 **父子文档检索**（Parent Document Retriever）：用小颗粒度检索，返回大颗粒度上下文，保证连贯性
+  - 元数据过滤：可依文件来源、日期、研究员筛选
+  - 检索后重排序（Reranker）：用轻量 Cross-Encoder 模型提升相关性
+- **社区情绪工具**：指定站点抓取 + 情感提取管道
+  - 封装为“获取雪球热帖”、“提取东财股吧情绪”等工具，返回结构化 JSON（情绪分数、关键词云、异动归因）
+
+### 4. 数据与任务层 – 异步、状态持久化
+
+- **任务队列**：Celery + Redis（必选，非可选）
+  - 长报告生成任务（15分钟内）拆分多个子任务组成 Chain/Group/Chord
+  - 异步网页抓取、大文档解析入库均通过任务执行
+- **数据存储**：
+  - Redis：缓存热门查询结果、任务状态、用户会话临时数据
+  - PostgreSQL / SQLite：存储最终报告、用户配置、自选股列表、任务历史（Demo 阶段可用 SQLite，成熟后切换）
+  - 向量数据库：Chroma 持久化模式，维护私有库索引
+- **定时调度**：Celery Beat，用于个人投资者的定期社区监控与异动提醒
+
+### 5. 模型层 – 低成本、多模型路由
+
+- **默认模型**：DeepSeek（更优中文能力，成本极低，作为主力）
+- **备选路由**：当 DeepSeek 不可用时自动降级至 GPT-3.5-turbo
+- **模型专用适配**：为情感分析、摘要、报告生成等任务编写不同的 System Prompt 模板，保持输出一致
+
+### 整体数据流示例（买方研究员生成周报）
+
+1. 用户在 Streamlit 输入“生成新能源汽车行业本周动态周报”。
+2. 前端将任务提交至 Celery，返回 `task_id`，界面进入轮询。
+3. Worker 中 Agent 规划步骤：
+   - 并行搜索“新能源汽车 本周 政策” “销量 周报” “头部公司 动态” 等 6 个方向
+   - 对搜索结果去重、抓取正文、LLM 摘要提取关键信息
+   - 合并信息，交叉验证事实，发现矛盾则追加搜索
+   - 调用模板生成结构化周报（Markdown）
+4. 结果存入 PostgreSQL，前端轮询到完成状态后拉取展示。
+
+***
+
+## 与成熟 Agent 的核心差距
+
+当前选型虽能快速验证业务，但距离 7x24 生产级、高可靠、可演进的成熟 Agent 存在以下关键短板：
+
+### 1. 状态与记忆
+
+- **现状**：Streamlit `session_state` 仅维持单次会话，无长期记忆。Agent 每次对话独立，不记得上次搜索偏好或用户身份。
+- **差距**：成熟 Agent 需要持久化的用户画像、对话历史、搜索偏好，并能根据历史交互主动调整策略。需引入对话数据库与记忆管理模块（LangChain 的 Memory 结合持久化存储）。
+
+### 2. 多用户与隔离
+
+- **现状**：单机 Chroma 与 Celery 默认单用户运行，多用户时知识库文件、任务队列、API 密钥完全共享。
+- **差距**：需要租户隔离：每个用户/团队的私有知识库独立索引，任务队列需按用户分流，计费与 API 配额按用户管控。必须加入用户认证与授权层（如 JWT + 角色控制）。
+
+### 3. 工具可靠性 & 错误自愈
+
+- **现状**：搜索 API 可能限流、目标网站反爬导致抓取失败、PDF 解析出错，当前缺乏系统级容错。
+- **差距**：成熟 Agent 需实现：
+  - 指数退避重试、断路器模式，防止级联失败
+  - 工具降级：Bing API 不可用时自动切换 Tavily
+  - 异常捕获结构化，将错误作为观测信号反馈给规划器
+
+### 4. 可观测性与评估
+
+- **现状**：无日志聚合、无 Trace，排查 Agent 决策链困难。LLM 输出质量无量化评估。
+- **差距**：必须建立 LLM 可观测性栈（如 LangSmith、LangFuse），记录每一步的 prompt、工具调用、响应时间。同时建立离线评估数据集（黄金问答集），用于回归测试 prompt 变更是否退化。
+
+### 5. 安全与护栏
+
+- **现状**：用户可直接嵌入越狱提示词、要求系统执行任意搜索，可能产生有害输出或无节制调用 API。
+- **差距**：需要输入/输出安全护栏：
+  - 输入检测：敏感主题阻断、注入攻击防御
+  - 输出审计：金融合规检查（如声明“不构成投资建议”）、杜绝诽谤性内容
+  - 工具层权限最小化：禁止访问内网、限制爬虫并发数
+
+### 6. 复杂文档理解
+
+- **现状**：仅 PyPDF 处理文本型 PDF，对财报中的表格、扫描件、图表无法理解。
+- **差距**：成熟 Agent 需引入多模态文档解析（如 Unstructured.io + GPT-4V 解析图表），并支持 `.docx`、`.xlsx` 等格式，才能处理真正的内部研报。
+
+### 7. 主动感知与推送
+
+- **现状**：个人投资者需求需要实时提醒，目前依赖前端轮询或人工触发。
+- **差距**：需要事件驱动架构，通过 Celery Beat 定时执行监控任务，一旦社区情绪异动（如突发暴跌讨论），通过 WebSocket 或消息推送（邮件/微信）实时通知用户。
+
+### 8. 成本与性能可控
+
+- **现状**：无 Token 用量追踪，无法按任务类型限流，高并发下极易耗尽预算或触发 API 限流。
+- **差距**：加入成本跟踪器（统计每次调用的 Token 消费），设置单用户/单日预算上限，并对热门查询做语义缓存（Cache 之前的 LLM 响应），大幅降低重复成本。
+
+***
+
+## 演进路径建议
+
+Demo 验证后，需逐步将“玩具级”Agent 加固为“生产级”系统，优先级建议：
+
+1. **可观测性与成本控制**（立即引入 LangFuse 追踪 + 缓存）
+2. **任务与记忆持久化**（PostgreSQL 替代 SQLite，增加对话历史）
+3. **多用户隔离与认证**（简易登录 + 按用户索引分隔）
+4. **工具可靠性与安全护栏**（重试机制 + 输入/输出审核）
+5. **多模态文档与主动推送**（按需扩展）
+
+这些差距正是 Demo 和可交付的成熟 Agent 产品之间的分水岭。当前选型正确，但必须在架构演进中逐项补齐，才能支撑起持续、稳定、可信的金融研究服务。
+
+> 技术栈总览参见 [技术栈](/druce-website/architecture/index.md)，核心流程参见 [数据流](/druce-website/architecture/data-flow.md)。
+
+
+
+---
+url: /druce-website/development/codebase-map.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/development/codebase-map.md.
+
+# 代码导览
+
+本页把 PRD 章节和验收标准映射到 `app/` 下的具体模块，让一个新贡献者能在 5 分钟内知道"某个功能在哪个文件里"。
+
+## PRD 章节 ↔ 代码模块
+
+| PRD 章节 | 模块文件                   | 一句话职责                            | 对应 AC |
+| :----- | :--------------------- | :------------------------------- | :---- |
+| 一、产品定位 | `app/streamlit_app.py` | Streamlit 单页前端，顶部文案即产品定位         | —     |
+| 三、核心功能 | `app/decompose.py`     | 问题拆解为 3-5 个子搜索词                  | AC-01 |
+| 三、核心功能 | `app/search.py`        | 多轮联网搜索（Tavily > Bing > Mock）     | AC-02 |
+| 三、核心功能 | `app/report.py`        | 报告生成，结构化四段输出                     | AC-03 |
+| 五、技术栈  | `app/config.py`        | 环境变量与运行配置，模式判定                   | —     |
+| 五、技术栈  | `app/llm.py`           | OpenAI 兼容 LLM 客户端                | —     |
+| 六、数据流  | `app/pipeline.py`      | 核心编排：拆解 → 搜索 → 验证 → 报告           | —     |
+| 数据模型   | `app/models.py`        | Source / DataPoint / Report 数据模型 | —     |
+
+## 模块依赖关系
+
+```mermaid
+flowchart TB
+  SA["streamlit_app.py"]
+  PL["pipeline.py<br/>run_pipeline · report_to_markdown"]
+  DC["decompose.py"]
+  SR["search.py"]
+  RP["report.py"]
+  LLM["llm.py"]
+  CFG["config.py"]
+  M["models.py"]
+
+  SA --> PL
+  PL --> DC
+  PL --> SR
+  PL --> RP
+  DC --> LLM
+  RP --> LLM
+  DC --> CFG
+  SR --> CFG
+  RP --> CFG
+  LLM --> CFG
+  PL --> M
+  SR --> M
+  RP --> M
+  DC --> M
+  classDef leaf fill:#f1f5f9,stroke:#94a3b8;
+  class CFG,M leaf;
+```
+
+## 各模块要点
+
+### `app/pipeline.py` — 编排核心
+
+`run_pipeline(question, on_progress)` 是唯一入口，按 PRD 第六节串联四个阶段。`on_progress` 是 Streamlit 的进度回调。
+
+`report_to_markdown(report)` 把结构化 `Report` 渲染为 Markdown，供前端展示。
+
+### `app/decompose.py` — 问题拆解（AC-01）
+
+有 LLM 时调模型拆解；无 LLM 时回退基于规则的 mock 拆解（去停用词 + 取前几个 token）。拆解结果对用户可见，满足"便于人工校验"。
+
+### `app/search.py` — 多轮联网搜索（AC-02）
+
+`SearchBackend` Protocol 定义统一接口，三个适配器：`TavilyBackend`、`BingBackend`、`MockBackend`。`_pick_backend()` 按 key 优先级选择。
+
+### `app/report.py` — 报告生成（AC-03）
+
+有 LLM 时调模型整合搜索结果为结构化报告；无 LLM 时基于 Source 直接合成 mock 报告。输出固定四段：摘要 → 分点详述 → 风险提示 → 参考资料。
+
+### `app/config.py` — 运行配置
+
+`Settings` dataclass 从环境变量读取密钥与拆解参数。`has_llm` / `has_search` / `is_mock` 三个属性判定整体运行模式。
+
+### `app/llm.py` — LLM 客户端
+
+OpenAI 兼容接口，`llm_complete(system, user, *, temperature, max_tokens) → str`。无 `OPENAI_API_KEY` 时上层应走 mock 流程，不直接调用本模块。
+
+### `app/models.py` — 数据模型
+
+Pydantic 模型，定义流程中各阶段的结构化产物：
+
+| 模型          | 含义                                                         |
+| :---------- | :--------------------------------------------------------- |
+| `Source`    | 一条搜索结果（标题、url、snippet、来源类型、权威等级）                           |
+| `DataPoint` | 报告中的一个论点（claim、sources、conflict、has\_evidence）             |
+| `Report`    | 结构化报告（question、subqueries、summary、points、risks、references） |
+
+## 入口脚本
+
+`run.py` 是启动入口，拼接 `streamlit run` 的命令行参数，支持 `python run.py [port]` 指定端口。
+
+> 想在本地改这些代码？读 [本地开发](/druce-website/development/local-dev.md)。
+
+
+
+---
+url: /druce-website/development/deployment.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/development/deployment.md.
+
+# 部署
+
+本页讲 Druce 文档站如何部署到 GitHub Pages。
+
+## 部署机制
+
+文档站基于 [Rspress](https://rspress.dev/)，通过 `rspress-plugin-gh-pages` 插件在构建时自动把产物推到 `gh-pages` 分支。
+
+关键配置在 `druce-website/rspress.config.ts`：
+
+```ts
+plugins: [
+  ghPages({
+    repo: "https://github.com/RoooyHe/druce-website.git",
+    branch: "gh-pages",
+    siteBase: "/druce-website/",
+  }),
+],
+```
+
+### 配置项说明
+
+| 配置         | 作用             | 本项目取值                   |
+| :--------- | :------------- | :---------------------- |
+| `repo`     | 目标 GitHub 仓库地址 | `RoooyHe/druce-website` |
+| `branch`   | 推送目标分支         | `gh-pages`              |
+| `siteBase` | 站点基础路径         | `/druce-website/`       |
+
+!> `siteBase` 必须与仓库名一致。若仓库名为 `my-docs`，则 `siteBase` 应设为 `/my-docs/`。否则 GitHub Pages 上所有静态资源路径都会 404。
+
+## 部署流程
+
+### 生产构建
+
+```bash
+cd druce-website
+bun run build:prod
+```
+
+`build:prod` 等价于 `NODE_ENV=production rspress build`。构建产物输出到 `doc_build/`，随后插件自动推送到 `gh-pages` 分支。
+
+?> 首次部署需要 GitHub 仓库的写入权限。若推送失败，检查本地 git 凭证是否配置正确。
+
+### 启用 GitHub Pages
+
+1. 打开仓库 `Settings → Pages`。
+2. Source 选 `Deploy from a branch`。
+3. Branch 选 `gh-pages`，目录选 `/ (root)`。
+4. Save 后等待几分钟，站点即可通过 `https://<username>.github.io/druce-website/` 访问。
+
+## 验证部署
+
+部署完成后，访问 `https://roooyhe.github.io/druce-website/`，确认：
+
+- 首页 hero 与 feature 卡正常渲染
+- 顶导 5 项均可点击且无 404
+- 各页面间内部链接通畅
+
+!> 若页面样式丢失或资源 404，首要检查 `siteBase` 是否与仓库名匹配。
+
+## LLMs.txt 支持
+
+`rspress.config.ts` 中 `llms: true` 开启了 [llms.txt](https://llmstxt.org/) 标准支持，构建时会生成 `llms.txt` 与 `llms-full.txt`，便于大语言模型抓取文档内容。
+
+> 本地预览方式参见 [本地开发](/druce-website/development/local-dev.md)。
+
+
+
+---
+url: /druce-website/development/getting-started.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/development/getting-started.md.
+
+# 快速开始
+
+本页带你从零跑通 Druce 初步报告模块 Demo。整个过程三步：安装依赖、配置密钥（可选）、启动。
+
+## 1. 安装依赖
+
+Druce 用 [uv](https://docs.astral.sh/uv/) 托管 Python 依赖。
+
+```bash
+uv sync
+```
+
+`uv sync` 会自动创建 `.venv` 并安装 `pyproject.toml` 中声明的依赖（streamlit、openai、tavily-python、pydantic 等）。
+
+?> 没装 uv？`pip install uv` 或参考 [uv 官方安装指南](https://docs.astral.sh/uv/getting-started/installation/)。
+
+## 2. 配置密钥（可选）
+
+无任何密钥时，Druce 自动进入 **mock 模式**，返回内置示例数据，开箱可演示。
+
+要切换到真实联网模式，复制环境模板并填入密钥：
+
+```bash
+cp .env.example .env
+# 编辑 .env，填入 OPENAI_API_KEY 与 TAVILY_API_KEY
+```
+
+`.env` 支持的变量：
+
+| 变量                | 作用          | 缺省                          |
+| :---------------- | :---------- | :-------------------------- |
+| `OPENAI_API_KEY`  | LLM 调用密钥    | 空 → 走规则拆解 + mock 报告         |
+| `OPENAI_BASE_URL` | OpenAI 兼容端点 | `https://api.openai.com/v1` |
+| `LLM_MODEL`       | 模型名         | `gpt-3.5-turbo`             |
+| `TAVILY_API_KEY`  | Tavily 搜索密钥 | 空                           |
+| `BING_API_KEY`    | Bing 搜索密钥   | 空                           |
+
+!> `.env` 含真实密钥，**切勿提交到版本库**。`.gitignore` 已默认忽略 `.env`。
+
+### 运行模式判定
+
+`app/config.py` 中的 `Settings` 按下表判定整体模式：
+
+| 条件        | `has_llm` | `has_search` | 行为                   |
+| :-------- | :-------- | :----------- | :------------------- |
+| 仅 LLM key | true      | false        | 拆解/报告走 LLM，搜索走 mock  |
+| 仅搜索 key   | false     | true         | 搜索走真实 API，拆解/报告走规则兜底 |
+| 两者齐全      | true      | true         | 全链路真实模式              |
+| 两者皆无      | false     | false        | 全链路 mock 模式          |
+
+## 3. 启动
+
+```bash
+uv run python run.py
+# 或指定端口
+uv run python run.py 8888
+```
+
+浏览器打开 `http://localhost:8501`，输入研究问题（例：**"本周电子行业有哪些值得关注的动态？"**），点击"生成报告"即可。
+
+## 下一步
+
+- 想看代码怎么组织？读 [代码导览](/druce-website/development/codebase-map.md)。
+- 想在本地改文档或跑测试？读 [本地开发](/druce-website/development/local-dev.md)。
+- 想把文档站部署到 GitHub Pages？读 [部署](/druce-website/development/deployment.md)。
+
+
+
+---
+url: /druce-website/development/local-dev.md
+---
+
+> For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/development/local-dev.md.
+
+# 本地开发
+
+本页讲清楚在本地改 Druce 代码或文档时需要的命令与规范。
+
+## Python 代码
+
+### 安装开发依赖
+
+`pyproject.toml` 的 `dev` 可选依赖包含 `ruff` 和 `pytest`：
+
+```bash
+uv sync --extra dev
+```
+
+### 代码规范
+
+用 [ruff](https://docs.astral.sh/ruff/) 做静态检查与格式化：
+
+```bash
+# 检查
+uv run ruff check app/
+
+# 自动修复
+uv run ruff check --fix app/
+
+# 格式化
+uv run ruff format app/
+```
+
+?> 提交前跑一次 `ruff check`，CI 也会跑同一套规则。
+
+### 测试
+
+```bash
+uv run pytest
+```
+
+目前项目尚无测试套件。新增功能时建议同步补测试，测试文件放 `tests/` 目录，命名 `test_*.py`。
+
+### 运行应用
+
+```bash
+uv run python run.py
+```
+
+修改 `app/` 下代码后，Streamlit 支持热重载——在浏览器右上角点 "Rerun" 或按 `R` 即可刷新。
+
+## 文档站
+
+### 本地预览
+
+```bash
+cd druce-website
+bun run dev
+```
+
+默认起在 `http://localhost:5173`。改 `docs/` 下任何 `.md` / `.mdx` 文件，Rspress 会热更新。
+
+### 写作规范
+
+本项目文档统一用 **GFM + Rspress 提示框**：
+
+| 语法      | 含义 | 用途        |
+| :------ | :- | :-------- |
+| `!> 内容` | 警告 | 危险操作、易踩坑点 |
+| `T> 内容` | 提示 | 技巧、可选优化   |
+| `?> 内容` | 详情 | 折叠的补充说明   |
+
+代码块默认显示行号（`rspress.config.ts` 中 `markdown.showLineNumbers: true`）。
+
+### 构建产物不入库
+
+`druce-website/doc_build/` 是 Rspress 构建产物，已在 `.gitignore` 中忽略。部署由 `rspress-plugin-gh-pages` 直接推 `gh-pages` 分支，无需本地构建产物入库。
+
+!> 不要手动把 `doc_build/` 提交到版本库，会让 PR diff 噪声极大。
+
+## 完整本地开发循环
+
+1. `uv sync --extra dev` — 装 Python 依赖
+2. `cd druce-website && bun install` — 装文档站依赖（首次）
+3. 改代码或文档
+4. `uv run ruff check app/` — 检查代码
+5. `uv run pytest` — 跑测试（如有）
+6. `cd druce-website && bun run dev` — 预览文档变更
+7. 提交 PR
+
+> 部署流程参见 [部署](/druce-website/development/deployment.md)。
 
 
 
@@ -508,7 +998,7 @@ Druce
 
 > 花五分钟得到别人花五小时手动搜索才能凑齐的行业情报
 
-[产品概览](/overview/) | [核心功能](/features/)
+[产品概览](/overview/) | [核心功能](/features/) | [快速开始](/development/getting-started)
 
 ## Features
 
