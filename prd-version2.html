@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AlphaAgent - 多视角 AI 金融投研助手 - Druce</title>
+<script>{;const saved = localStorage.getItem('rspress-theme-appearance');const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;const defaultTheme = 'auto';const theme = saved === 'light' || saved === 'dark' || saved === 'auto' ? saved : defaultTheme;const isDark = theme === 'auto' ? preferDark : theme === 'dark';document.documentElement.classList.toggle('dark', isDark);document.documentElement.classList.toggle('rp-dark', isDark);document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';}</script>
+<link href="/druce-website/static/css/styles.d460345ad8.css" rel="stylesheet">
+<link rel="preload" href="/druce-website/static/js/async/route-7fb3fa811295.cceb3daf63.js" as="script">
+<script defer src="/druce-website/static/js/styles.2cc63ad49f.js"></script>
+<script defer src="/druce-website/static/js/lib-react.c1f7ec5b0c.js"></script>
+<script defer src="/druce-website/static/js/lib-router.7a7ade2827.js"></script>
+<script defer src="/druce-website/static/js/9478.6e664506cf.js"></script>
+<script defer src="/druce-website/static/js/index.40a55bf78d.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Rspress v2.0.19">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AlphaAgent - 多视角 AI 金融投研助手 - Druce">
+<meta name="description" content="AI 投研助手">
+<meta property="og:description" content="AI 投研助手"></head>
+
+  <body>
+    <div id="__rspress_root"><div class="rp-llms-hint" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);clip-path:inset(50%);white-space:nowrap;border:0">For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/prd-version2.md.</div><header class="rp-nav"><div class="rp-nav__left"><div class="rp-nav__title"><a href="/druce-website/" class="rp-nav__title__link rp-link"><span>Druce</span></a></div></div><div class="rp-nav__right"><button class="rp-search-button"><div class="rp-search-button__content"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21" class="rp-search-button__icon"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg><span class="rp-search-button__word">Search</span></div><div class="rp-search-button__hotkey" style="opacity:0"><span></span><span>K</span></div></button><div class="rp-search-button--mobile"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg></div><ul class="rp-nav-menu rp-nav-menu--right"><li class="rp-nav-menu__item"><a href="/druce-website/overview/index.html" class="rp-nav-menu__item__container rp-link">产品概览</a></li><li class="rp-nav-menu__item"><a href="/druce-website/features/index.html" class="rp-nav-menu__item__container rp-link">核心功能</a></li><li class="rp-nav-menu__item"><a href="/druce-website/architecture/index.html" class="rp-nav-menu__item__container rp-link">技术架构</a></li><li class="rp-nav-menu__item"><a href="/druce-website/development/index.html" class="rp-nav-menu__item__container rp-link">开发指南</a></li><li class="rp-nav-menu__item"><a href="/druce-website/初步报告生成PRD.html" class="rp-nav-menu__item__container rp-link">原始 PRD</a></li></ul><div class="rp-nav__others"><div class="rp-nav-menu__divider"></div><div class="rp-switch-appearance"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" class="rp-switch-appearance__icon rp-switch-appearance__icon--sun"><path fill="currentColor" d="m7.001 15.848-1.226 1.226a.58.58 0 0 0 0 .818.58.58 0 0 0 .818 0l1.226-1.226a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0m-.352-8.735a.584.584 0 0 0 .825-.825L6.237 5.051a.584.584 0 0 0-.825.825zM5.011 11.07h-1.75a.584.584 0 0 0 0 1.167h1.75c.324 0 .584-.26.584-.583a.585.585 0 0 0-.584-.584m7.003-5.835c.324 0 .584-.26.584-.584V2.9a.58.58 0 0 0-.584-.584.58.58 0 0 0-.583.583V4.65c0 .323.262.584.583.584m5.616 1.621 1.226-1.225a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0l-1.226 1.225a.58.58 0 0 0 0 .818.576.576 0 0 0 .818 0m3.138 4.214h-1.75a.58.58 0 0 0-.584.584c0 .324.26.584.583.584h1.751a.584.584 0 1 0 0-1.167m-3.389 5.124a.584.584 0 0 0-.825.825l1.238 1.238a.584.584 0 0 0 .825-.826zm-5.365-9.795a5.256 5.256 0 0 0-5.257 5.258 5.256 5.256 0 0 0 5.257 5.257 5.256 5.256 0 0 0 5.257-5.257 5.256 5.256 0 0 0-5.257-5.258m0 11.675a.58.58 0 0 0-.583.583v1.751a.582.582 0 1 0 1.167 0v-1.75a.584.584 0 0 0-.584-.584"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 19 19" class="rp-switch-appearance__icon rp-switch-appearance__icon--moon"><path fill="currentColor" d="M9.166 0a9.2 9.2 0 0 1 1.857.188.834.834 0 0 1 .042 1.623 4.47 4.47 0 1 0 5.457 5.457l.048-.135a.834.834 0 0 1 1.575.177q.186.902.188 1.856A9.168 9.168 0 1 1 9.166 0"></path></svg></div><div class="rp-social-links"><a href="https://github.com/RoooyHe/druce-website" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__sm"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg></button><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__md"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"><div class="rp-nav-menu__others-mobile__container"><div class="rp-nav-hamburger__md__hover-group"><div class="rp-nav-screen-appearance"><div class="rp-nav-screen-appearance__left">Theme</div><div class="rp-nav-screen-appearance__right"></div></div><div class="rp-nav-screen-divider"></div><div class="rp-social-links"><a href="https://github.com/RoooyHe/druce-website" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div></div></ul></button></div></header><div class="rp-doc-layout__menu"><div class="rp-sidebar-menu"><button type="button" class="rp-sidebar-menu__left"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M4 6h24v2H4zm0 18h24v2H4zm0-12h24v2H4zm0 6h24v2H4z"></path></svg><span>Menu</span></button><button type="button" class="rp-sidebar-menu__right"><span class="rp-sidebar-menu__right__text">ON THIS PAGE</span><svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-sidebar-menu__right__icon" style="transform:rotate(0deg);transition:transform 0.2s ease-out"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></button></div></div><div class="rp-doc-layout__container"><aside class="rp-doc-layout__sidebar rp-scrollbar"><a href="/druce-website/overview/index.html" class="rp-sidebar-item rp-sidebar-group rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">产品概览</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></a><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/overview/index.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">产品定位</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/overview/users.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">目标用户与场景</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/overview/scenarios.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">Demo 展示场景</span></div><div class="rp-sidebar-item__right"></div></a></div></div><a href="/druce-website/features/index.html" class="rp-sidebar-item rp-sidebar-group rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">核心功能</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></a><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/features/index.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">核心功能概览</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/features/prd-version2.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">AlphaAgent PRD v2</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/features/acceptance.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">验收标准</span></div><div class="rp-sidebar-item__right"></div></a></div></div><a href="/druce-website/architecture/index.html" class="rp-sidebar-item rp-sidebar-group rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">技术架构</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></a><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/architecture/index.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">技术栈</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/architecture/data-flow.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">数据流</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/architecture/data-sources.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">数据来源策略</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/architecture/road-map.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">演进路线</span></div><div class="rp-sidebar-item__right"></div></a></div></div><div class="rp-sidebar-item rp-sidebar-group" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">开发指南</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></div><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/development/getting-started.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">快速开始</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/development/codebase-map.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">代码导览</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/development/local-dev.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">本地开发</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/development/deployment.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">部署</span></div><div class="rp-sidebar-item__right"></div></a></div></div><a href="/druce-website/初步报告生成PRD.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">原始 PRD</span></div><div class="rp-sidebar-item__right"></div></a></aside><div class="rp-doc-layout__doc"><main class="rp-doc-layout__doc-container"><div class="rp-doc rspress-doc"><!--$--><h1 class="rp-toc-include" id="alphaagent---多视角-ai-金融投研助手"><a href="#alphaagent---多视角-ai-金融投研助手" class="rp-header-anchor rp-link" aria-hidden="true">#</a>AlphaAgent - 多视角 AI 金融投研助手<!-- --> </h1><div class="rp-not-doc rp-llms-container"><button class="rp-not-doc rp-llms-button rp-llms-copy-button"><div class="rp-llms-copy-button__icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg></div><span>Copy Markdown</span></button><button class="rp-llms-button rp-llms-view-options__trigger "><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-llms-view-options__arrow "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button></div>
+<h2 class="rp-toc-include" id="产品需求文档-prd"><a href="#产品需求文档-prd" class="rp-header-anchor rp-link" aria-hidden="true">#</a>产品需求文档 (PRD)</h2>
+<h2 class="rp-toc-include" id="1-文档信息与项目背景"><a href="#1-文档信息与项目背景" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1. 文档信息与项目背景</h2>
+<h3 class="rp-toc-include" id="11-核心定位"><a href="#11-核心定位" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1.1 核心定位</h3>
+<p>基于开源数据源与 Agent 协同架构，融合确定性代码计算与多投资哲学（价值/成长/风控）碰撞，提供零幻觉、可追溯的公司深度投研报告。</p>
+<h3 class="rp-toc-include" id="12-解决痛点"><a href="#12-解决痛点" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1.2 解决痛点</h3>
+<ul>
+<li>传统大模型做金融分析易产生数字幻觉、计算不精准。</li>
+<li>单一 LLM 生成的研报观点平庸、同质化，缺乏多维度博弈视角。</li>
+<li>商业金融数据库成本昂贵，缺少面向开发者和中小投资者的零成本自动化投研工具。</li>
+</ul>
+<hr/>
+<h2 class="rp-toc-include" id="2-产品总体架构设计"><a href="#2-产品总体架构设计" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2. 产品总体架构设计</h2>
+<p>系统采用 &quot;确定性计算 + 多 Agent 协同推演 + 反思审核&quot; 的三层架构：
+[ 用户输入：股票代码 / 公司名称 ]
+│
+▼
+【层 1：数据采集与确定性计算引擎 (Data Engine)】
+(调用 AKShare/巨潮资讯，解析 PDF 财报与基础行情，计算财务比率)
+│
+┌───────────────────────┼───────────────────────┐
+▼                       ▼                       ▼
+【价值派 Agent (Value)】  【成长派 Agent (GARP)】  【风控/找茬 Agent (Risk)】
+(侧重 ROE/现金流/护城河)  (侧重 PEG/营收增速/效率)   (侧重债务/应收账款/存货)
+│                       │                       │
+└───────────────────────┼───────────────────────┘
+▼
+【层 2：综合研判与分歧辩论 Agent (Debate/Consensus)】
+(对比各视角分歧，生成投资判定仪表盘与综合结论)
+│
+▼
+【层 3：反思核查 Agent (Auditor &amp; Traceability)】
+(逐句核查数据来源，标注文档页码，剔除数字幻觉)
+│
+▼
+[ 最终输出：五章 Markdown 研报 ]</p>
+<hr/>
+<h2 class="rp-toc-include" id="3-核心功能模块与需求明细"><a href="#3-核心功能模块与需求明细" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3. 核心功能模块与需求明细</h2>
+<h3 class="rp-toc-include" id="31-模块一数据采集与确定性计算引擎-data-engine"><a href="#31-模块一数据采集与确定性计算引擎-data-engine" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.1 模块一：数据采集与确定性计算引擎 (Data Engine)</h3>
+<p><strong>需求目标</strong>：获取基础数据并完成所有数值计算，保证大模型不参与基础算术。</p>
+<p><strong>数据源规划</strong>：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>数据类型</th><th>数据源</th></tr></thead><tbody><tr><td>行情/财务报表</td><td>AKShare (Python 开源接口)</td></tr><tr><td>官方公告/财报文本</td><td>巨潮资讯网 (cninfo) 抓取 PDF/文本</td></tr><tr><td>新闻/舆情</td><td>Tavily / Serper API 或 AKShare 个股新闻接口</td></tr></tbody></table></div>
+<p><strong>功能需求</strong>：</p>
+<ol>
+<li>自动提取近 3~5 年三大财务报表（资产负债表、利润表、现金流量表）。</li>
+<li>确定性计算：在 Python 侧直接计算出 ROE、毛利率、净利率、资产负债率、应收账款周转天数、PEG、经营性现金流/净利润比值等指标。</li>
+<li>规则预警打标：若触发特定异常规则（如：应收账款增速 &gt; 营收增速 + 15%），自动打上警告标签 <code>[Anomaly_Tag]</code> 传给后续 Agent。</li>
+</ol>
+<h3 class="rp-toc-include" id="32-模块二多视角投资框架-agent-multi-perspective-agents"><a href="#32-模块二多视角投资框架-agent-multi-perspective-agents" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.2 模块二：多视角投资框架 Agent (Multi-Perspective Agents)</h3>
+<p><strong>需求目标</strong>：对同一组确定性数据，从不同投资哲学维度进行并行归因推演。</p>
+<h4 class="rp-toc-include" id="1-巴菲特式价值派-agent-value-agent"><a href="#1-巴菲特式价值派-agent-value-agent" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1) 巴菲特式价值派 Agent (Value Agent)</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>分析维度</strong></td><td>护城河（品牌/转换成本）、ROE 稳定性、自由现金流、债务风险</td></tr><tr><td><strong>硬性规则</strong></td><td>若连续 3 年 ROE &lt; 12% 或资产负债率 &gt; 60%，扣除护城河得分</td></tr><tr><td><strong>输出格式</strong></td><td>【看多/观望/看空】+ 护城河逻辑 + 最关心风险</td></tr></tbody></table></div>
+<h4 class="rp-toc-include" id="2-彼得林奇成长派-agent-garp-agent"><a href="#2-彼得林奇成长派-agent-garp-agent" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2) 彼得·林奇成长派 Agent (GARP Agent)</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>分析维度</strong></td><td>营收与净利增速、PEG 指标、存货与营收匹配度</td></tr><tr><td><strong>硬性规则</strong></td><td>评估 PEG 是否在 0.5~1.2 的合理成长区间，检查存货是否异常堆积</td></tr><tr><td><strong>输出格式</strong></td><td>【看多/观望/看空】+ 成长匹配度逻辑 + 拓展潜力</td></tr></tbody></table></div>
+<h4 class="rp-toc-include" id="3-风控与做空视角-agent-risk-agent"><a href="#3-风控与做空视角-agent-risk-agent" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3) 风控与做空视角 Agent (Risk Agent)</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td><strong>分析维度</strong></td><td>寻找财报隐患、非经常性损益占比、现金流断裂隐患</td></tr><tr><td><strong>硬性规则</strong></td><td>重点扫描 <code>[Anomaly_Tag]</code>，审查商誉占比与应收账款坏账风险</td></tr><tr><td><strong>输出格式</strong></td><td>【低/中/高风险】+ 核心财务隐患清单</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="33-模块三分歧辩论与综合研判-agent-debate--consensus-agent"><a href="#33-模块三分歧辩论与综合研判-agent-debate--consensus-agent" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.3 模块三：分歧辩论与综合研判 Agent (Debate &amp; Consensus Agent)</h3>
+<p><strong>需求目标</strong>：汇总各 Agent 评估结果，寻找&quot;共识&quot;与&quot;分歧&quot;，输出综合投资建议。</p>
+<p><strong>功能需求</strong>：</p>
+<ul>
+<li>生成多视角对比矩阵（Dashboard 表格）。</li>
+<li>提取共识点（如：产品市场需求持续增长）。</li>
+<li>梳理核心争议点</li>
+<li>给出分人群操作建议（如：适合成长型资金，保守价值资金建议观望）。</li>
+</ul>
+<h3 class="rp-toc-include" id="34-模块四反思核查与数据可追溯模块-auditor-agent"><a href="#34-模块四反思核查与数据可追溯模块-auditor-agent" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.4 模块四：反思核查与数据可追溯模块 (Auditor Agent)</h3>
+<p><strong>需求目标</strong>：解决幻觉，确保生成报告的可信度。</p>
+<p><strong>功能需求</strong>：</p>
+<ul>
+<li><strong>溯源标注</strong>：对报告中涉及的每一个具体财务数据，自动附带出处索引，对生成的文本与 Data Engine 提供的数据进行二次比对。若发现数字不符或无中生有，打回重写。</li>
+</ul>
+<hr/>
+<h2 class="rp-toc-include" id="4-输出成果规范-deliverable-format"><a href="#4-输出成果规范-deliverable-format" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4. 输出成果规范 (Deliverable Format)</h2>
+<p>Agent 最终输出的报告严格遵循以下五章结构（Markdown 格式）：</p>
+<hr/>
+<h3 class="rp-toc-include" id="第一章摘要与多视角判定矩阵"><a href="#第一章摘要与多视角判定矩阵" class="rp-header-anchor rp-link" aria-hidden="true">#</a>第一章：摘要与多视角判定矩阵</h3>
+<p><strong>定位</strong>：给决策者看的&quot;结论先行&quot;仪表盘。无需阅读全篇，1 分钟内掌握核心分歧与结论。</p>
+<h4 class="rp-toc-include" id="11-公司摘要及核心结论"><a href="#11-公司摘要及核心结论" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1.1 公司摘要及核心结论</h4>
+<p>基于多 Agent 综合研判，给出公司摘要和投资建议。</p>
+<h4 class="rp-toc-include" id="12-投资视角碰撞矩阵"><a href="#12-投资视角碰撞矩阵" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1.2 投资视角碰撞矩阵</h4>
+<p>用标准 Markdown 表格展现各角色的分歧。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>投资视角</th><th>投资判定</th><th>核心逻辑摘要</th><th>匹配度/风险得分</th></tr></thead><tbody><tr><td>价值派</td><td>看多/观望/看空</td><td>xxx</td><td>xx/100</td></tr><tr><td>成长派</td><td>看多/观望/看空</td><td>xxx</td><td>xx/100</td></tr><tr><td>风控派</td><td>低/中/高风险</td><td>xxx</td><td>xx/100</td></tr></tbody></table></div>
+<h4 class="rp-toc-include" id="13-核心分歧点与共识总结"><a href="#13-核心分歧点与共识总结" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1.3 核心分歧点与共识总结</h4>
+<p><strong>共识</strong>：所有 Agent 达成一致的事实</p>
+<ul>
+<li>例如：&quot;公司产品在海外市场增速确实达到 45%&quot;</li>
+</ul>
+<p><strong>分歧</strong>：不同视角争论的焦点</p>
+<ul>
+<li>例如：&quot;价值派认为高研发削弱了当期利润，创新派认为这是构筑技术壁垒的必要投入&quot;</li>
+</ul>
+<hr/>
+<h3 class="rp-toc-include" id="第二章基础数据与确定性指标分析"><a href="#第二章基础数据与确定性指标分析" class="rp-header-anchor rp-link" aria-hidden="true">#</a>第二章：基础数据与确定性指标分析</h3>
+<p><strong>定位</strong>：展现系统的零幻觉底座。所有数据由 Python/AKShare 确定性计算，不依赖大模型猜测。</p>
+<h4 class="rp-toc-include" id="21-财务健康度硬指标"><a href="#21-财务健康度硬指标" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.1 财务健康度硬指标</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>维度</th><th>指标</th><th>数值</th><th>评价</th></tr></thead><tbody><tr><td>盈利能力</td><td>ROE</td><td>xx%</td><td>优秀/一般/较差</td></tr><tr><td>盈利能力</td><td>毛利率趋势</td><td>xx%</td><td>稳定/下滑/提升</td></tr><tr><td>盈利能力</td><td>净利润率</td><td>xx%</td><td>优秀/一般/较差</td></tr><tr><td>成长性</td><td>营收增速</td><td>xx%</td><td>高速/中速/低速</td></tr><tr><td>成长性</td><td>净利润增速</td><td>xx%</td><td>高速/中速/低速</td></tr><tr><td>偿债与现金流</td><td>资产负债率</td><td>xx%</td><td>健康/偏高/危险</td></tr><tr><td>偿债与现金流</td><td>经营性现金流/净利润</td><td>x.x</td><td>健康/警惕</td></tr></tbody></table></div>
+<h4 class="rp-toc-include" id="22-估值与市场表现"><a href="#22-估值与市场表现" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.2 估值与市场表现</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>指标</th><th>当前值</th><th>历史分位数</th><th>行业平均</th></tr></thead><tbody><tr><td>PE</td><td>xx</td><td>xx%</td><td>xx</td></tr><tr><td>PB</td><td>xx</td><td>xx%</td><td>xx</td></tr><tr><td>PS</td><td>xx</td><td>xx%</td><td>xx</td></tr><tr><td>PEG</td><td>x.x</td><td>—</td><td>—</td></tr></tbody></table></div>
+<h4 class="rp-toc-include" id="23-异常指标自动预警"><a href="#23-异常指标自动预警" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.3 异常指标自动预警</h4>
+<p>记录系统通过规则计算触发的异动标记：</p>
+<ul>
+<li><code>[预警]</code> 应收账款增速 (42%) &gt; 营业收入增速 (15%)</li>
+<li><code>[预警]</code> 存货同比增速 (25%) &gt; 营收同比增速 (8%)</li>
+</ul>
+<hr/>
+<h3 class="rp-toc-include" id="第三章经典投资框架深度推演"><a href="#第三章经典投资框架深度推演" class="rp-header-anchor rp-link" aria-hidden="true">#</a>第三章：经典投资框架深度推演</h3>
+<p><strong>定位</strong>：展示 3 个独立 Agent 站在不同投资哲学下的深度推演。</p>
+<hr/>
+<h4 class="rp-toc-include" id="一价值派-巴菲特芒格-视角"><a href="#一价值派-巴菲特芒格-视角" class="rp-header-anchor rp-link" aria-hidden="true">#</a>一、价值派 (巴菲特/芒格 视角)</h4>
+<p><strong>核心逻辑</strong>：追求自带高护城河、现金流极其充沛、资产负债表干净的好公司。</p>
+<h5 class="rp-toc-include" id="1-核心指标与定量阈值表"><a href="#1-核心指标与定量阈值表" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1. 核心指标与定量阈值表</h5>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>指标名称</th><th>计算公式</th><th>优选数值/门槛 (看多)</th><th>警告/剔除数值 (看空)</th><th>数据来源/字段</th></tr></thead><tbody><tr><td>净资产收益率 (ROE)</td><td>归母净利润 / 平均归母净资产</td><td>近 5 年平均值 &gt; 15%，且单年最低不低于 12%</td><td>近 3 年平均值 &lt; 10%，或波动标准差 &gt; 8%</td><td>利润表 / 资产负债表</td></tr><tr><td>自由现金流 (FCF)</td><td>经营活动现金流量净额 - 资本开支</td><td>连续 3 年为正，且 FCF/归母净利润 ≥ 0.8</td><td>近 3 年有 2 年为负，或比值 &lt; 0.3</td><td>现金流量表</td></tr><tr><td>毛利率及其稳定性</td><td>(营业收入 - 营业成本) / 营业收入</td><td>毛利率 &gt; 30%，且近 5 年极差 &lt; 5%</td><td>毛利率 &lt; 15%，或近 3 年连续下滑</td><td>利润表</td></tr><tr><td>资产负债率</td><td>总负债 / 总资产</td><td>&lt; 40%（金融/建筑行业除外）</td><td>&gt; 60%</td><td>资产负债表</td></tr><tr><td>现金保障度</td><td>(货币资金 + 交易性金融资产) / 总资产</td><td>&gt; 15%</td><td>&lt; 5%</td><td>资产负债表</td></tr></tbody></table></div>
+<h5 class="rp-toc-include" id="2-代码prompt-硬性判定规则"><a href="#2-代码prompt-硬性判定规则" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2. 代码/Prompt 硬性判定规则</h5>
+<ul>
+<li><strong>看多（Pass）</strong>：ROE &gt; 15% AND FCF 为正 AND 资产负债率 &lt; 40%</li>
+<li><strong>一票否决（Reject）</strong>：若连续 2 年 FCF 为负，无论利润多高，判定为【非价值标的】</li>
+</ul>
+<hr/>
+<h4 class="rp-toc-include" id="二成长派-彼得林奇-garp-视角"><a href="#二成长派-彼得林奇-garp-视角" class="rp-header-anchor rp-link" aria-hidden="true">#</a>二、成长派 (彼得·林奇 GARP 视角)</h4>
+<p><strong>核心逻辑</strong>：寻找&quot;合理价格下的高成长&quot;，将业绩扩张速度与估值进行匹配。</p>
+<h5 class="rp-toc-include" id="1-核心指标与定量阈值表-1"><a href="#1-核心指标与定量阈值表-1" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1. 核心指标与定量阈值表</h5>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>指标名称</th><th>计算公式</th><th>优选数值/门槛 (看多)</th><th>警告/剔除数值 (看空)</th><th>数据来源/字段</th></tr></thead><tbody><tr><td>PEG 指标</td><td>动态 PE / 未来 3 年预计净利润复合增速</td><td>0.5 ≤ PEG ≤ 1.0</td><td>PEG &gt; 1.5 或 PEG &lt; 0.3</td><td>行情 / 利润表 / 券商一致预期</td></tr><tr><td>营业收入复合增速</td><td>本期营收与 3 年前同期营收的年化增速</td><td>&gt; 20%</td><td>&lt; 8%（增长停滞）</td><td>利润表</td></tr><tr><td>利润/营收增速差</td><td>净利润同比增速 - 营收同比增速</td><td>&gt; 0%</td><td>&lt; -10%（增收不增利）</td><td>利润表</td></tr><tr><td>存货与营收增速差</td><td>存货同比增速 - 营收同比增速</td><td>≤ 0%</td><td>&gt; 15%（存货堆积）</td><td>资产负债表 / 利润表</td></tr><tr><td>研发投入占比</td><td>研发费用 / 营业收入</td><td>&gt; 8%（科技/医药类）</td><td>&lt; 2%（缺乏技术护城河）</td><td>利润表附注</td></tr></tbody></table></div>
+<h5 class="rp-toc-include" id="2-代码prompt-硬性判定规则-1"><a href="#2-代码prompt-硬性判定规则-1" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2. 代码/Prompt 硬性判定规则</h5>
+<ul>
+<li><strong>看多（Pass）</strong>：营收增速 &gt; 20% AND 0.5 ≤ PEG ≤ 1.0 AND 存货增速低于营收增速</li>
+<li><strong>一票否决（Reject）</strong>：若营收增速连续 2 个季度同比 &lt; 5%，判定为【成长逻辑破灭】</li>
+</ul>
+<hr/>
+<h4 class="rp-toc-include" id="三风控与做空视角"><a href="#三风控与做空视角" class="rp-header-anchor rp-link" aria-hidden="true">#</a>三、风控与做空视角</h4>
+<p><strong>核心逻辑</strong>：基于&quot;怀疑论&quot;，验证利润的含金量与资产负债表的问题。</p>
+<h5 class="rp-toc-include" id="1-核心指标与定量阈值表-2"><a href="#1-核心指标与定量阈值表-2" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1. 核心指标与定量阈值表</h5>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>筛查维度</th><th>核心指标与计算公式</th><th>正常/安全区间</th><th>预警数值</th><th>检查目的</th></tr></thead><tbody><tr><td>真金白银验伪</td><td>收现比 = 销售商品收到的现金 / 营业收入</td><td>≥ 0.9</td><td>&lt; 0.7</td><td>警惕虚构营收</td></tr><tr><td>主业造血能力</td><td>扣非利润占比 = 扣非净利润 / 归母净利润</td><td>&gt; 85%</td><td>&lt; 60%</td><td>警惕靠政府补贴、卖房凑利润</td></tr><tr><td>商誉减值</td><td>商誉占比 = 商誉 / 归母净资产</td><td>&lt; 10%</td><td>&gt; 20%</td><td>高溢价并购留下的巨大隐患</td></tr><tr><td>应收账款异动</td><td>应收增速差 = 应收账款增速 - 营收增速</td><td>≤ 5%</td><td>&gt; 15%</td><td>警惕提前确认收入、放宽信用</td></tr><tr><td>存贷双高异动</td><td>高货币资金 + 高有息负债</td><td>利息收益与利息支出匹配</td><td>账面现金 &gt; 30% 却大量举债</td><td>警惕大股东占用资金</td></tr></tbody></table></div>
+<h5 class="rp-toc-include" id="2-代码prompt-硬性判定规则-2"><a href="#2-代码prompt-硬性判定规则-2" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2. 代码/Prompt 硬性判定规则</h5>
+<ul>
+<li><strong>低风险（Low Risk）</strong>：收现比 &gt; 0.9 AND 商誉占比 &lt; 10% AND 应收增速差 &lt; 5%</li>
+<li><strong>高风险触发（Red Flag）</strong>：若触发&quot;收现比 &lt; 0.7&quot; 或 &quot;商誉/净资产 &gt; 20%&quot;，标记为【高风险/财务粉饰嫌疑标的】</li>
+</ul>
+<hr/>
+<h3 class="rp-toc-include" id="第四章数据可追溯性与事实核查"><a href="#第四章数据可追溯性与事实核查" class="rp-header-anchor rp-link" aria-hidden="true">#</a>第四章：数据可追溯性与事实核查</h3>
+<p><strong>定位</strong>：展现 AI 设计的严谨性，解决大模型幻觉问题。</p>
+<h4 class="rp-toc-include" id="41-关键事实溯源表"><a href="#41-关键事实溯源表" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.1 关键事实溯源表</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>数据/观点</th><th>数值</th><th>原始出处</th></tr></thead><tbody><tr><td>2024 年 ROE</td><td>18.5%</td><td>巨潮资讯 - 2024 年报 P.23</td></tr><tr><td>应收账款增速</td><td>42%</td><td>巨潮资讯 - 2024 年报 P.45</td></tr><tr><td>商誉/净资产</td><td>22.3%</td><td>巨潮资讯 - 2024 年报 P.56</td></tr><tr><td>...</td><td>...</td><td>...</td></tr></tbody></table></div>
+<h4 class="rp-toc-include" id="42-审查-agent-修正记录"><a href="#42-审查-agent-修正记录" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4.2 审查 Agent 修正记录</h4>
+<p>展示系统自我修正的过程：</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>版本</th><th>问题描述</th><th>修正动作</th></tr></thead><tbody><tr><td>初稿</td><td>误将拟投资金额认作已支出金额</td><td>审查 Agent 校验后打回修正</td></tr><tr><td>初稿</td><td>引用 PE 分位数数据错误</td><td>与 Data Engine 二次比对后更正</td></tr></tbody></table></div>
+<hr/>
+<h3 class="rp-toc-include" id="第五章情景推演与投资策略建议"><a href="#第五章情景推演与投资策略建议" class="rp-header-anchor rp-link" aria-hidden="true">#</a>第五章：情景推演与投资策略建议</h3>
+<p><strong>定位</strong>：从分析走向落地决策。</p>
+<p>针对不同类型投资者的操作建议</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>投资者类型</th><th>建议</th><th>关键关注指标</th></tr></thead><tbody><tr><td><strong>保守型/价值资金</strong></td><td>建议观望，等待特定风险指标改善后再入场</td><td>应收账款增速、商誉占比</td></tr><tr><td><strong>稳健型资金</strong></td><td>可小仓位参与，关注 PE 分位数</td><td>ROE 趋势、股息率</td></tr><tr><td><strong>激进型/成长资金</strong></td><td>可逢低建仓，必须设定严格止损位（如破位 10% 止损）</td><td>营收增速、PEG 区间</td></tr></tbody></table></div><!--/$--></div><footer class="rp-doc-footer"><div class="rp-doc-footer__edit"></div><div class="rp-doc-footer__divider"></div><div class="rp-prev-next-page"><div class="rp-prev-next-page__placeholder"></div><a href="/druce-website/overview/index.html" class="rp-prev-next-page__item rp-prev-next-page__next rp-link"><span class="rp-prev-next-page__item__desc">Next page</span><span class="rp-prev-next-page__item__title"><span>产品概览</span><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-prev-next-page__icon"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></span></a></div></footer></main></div><aside class="rp-doc-layout__outline rp-scrollbar"><div class="rp-outline"><div class="rp-outline__title">ON THIS PAGE<svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg></div><nav class="rp-outline__toc rp-scrollbar"><a href="#产品需求文档-prd" class="rp-toc-item rp-link" title="产品需求文档 (PRD)" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">产品需求文档 (PRD)</span></a><a href="#1-文档信息与项目背景" class="rp-toc-item rp-link" title="1. 文档信息与项目背景" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">1. 文档信息与项目背景</span></a><a href="#11-核心定位" class="rp-toc-item rp-link" title="1.1 核心定位" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">1.1 核心定位</span></a><a href="#12-解决痛点" class="rp-toc-item rp-link" title="1.2 解决痛点" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">1.2 解决痛点</span></a><a href="#2-产品总体架构设计" class="rp-toc-item rp-link" title="2. 产品总体架构设计" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">2. 产品总体架构设计</span></a><a href="#3-核心功能模块与需求明细" class="rp-toc-item rp-link" title="3. 核心功能模块与需求明细" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">3. 核心功能模块与需求明细</span></a><a href="#31-模块一数据采集与确定性计算引擎-data-engine" class="rp-toc-item rp-link" title="3.1 模块一：数据采集与确定性计算引擎 (Data Engine)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.1 模块一：数据采集与确定性计算引擎 (Data Engine)</span></a><a href="#32-模块二多视角投资框架-agent-multi-perspective-agents" class="rp-toc-item rp-link" title="3.2 模块二：多视角投资框架 Agent (Multi-Perspective Agents)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.2 模块二：多视角投资框架 Agent (Multi-Perspective Agents)</span></a><a href="#1-巴菲特式价值派-agent-value-agent" class="rp-toc-item rp-link" title="1) 巴菲特式价值派 Agent (Value Agent)" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">1) 巴菲特式价值派 Agent (Value Agent)</span></a><a href="#2-彼得林奇成长派-agent-garp-agent" class="rp-toc-item rp-link" title="2) 彼得·林奇成长派 Agent (GARP Agent)" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">2) 彼得·林奇成长派 Agent (GARP Agent)</span></a><a href="#3-风控与做空视角-agent-risk-agent" class="rp-toc-item rp-link" title="3) 风控与做空视角 Agent (Risk Agent)" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">3) 风控与做空视角 Agent (Risk Agent)</span></a><a href="#33-模块三分歧辩论与综合研判-agent-debate--consensus-agent" class="rp-toc-item rp-link" title="3.3 模块三：分歧辩论与综合研判 Agent (Debate &amp; Consensus Agent)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.3 模块三：分歧辩论与综合研判 Agent (Debate &amp; Consensus Agent)</span></a><a href="#34-模块四反思核查与数据可追溯模块-auditor-agent" class="rp-toc-item rp-link" title="3.4 模块四：反思核查与数据可追溯模块 (Auditor Agent)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.4 模块四：反思核查与数据可追溯模块 (Auditor Agent)</span></a><a href="#4-输出成果规范-deliverable-format" class="rp-toc-item rp-link" title="4. 输出成果规范 (Deliverable Format)" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">4. 输出成果规范 (Deliverable Format)</span></a><a href="#第一章摘要与多视角判定矩阵" class="rp-toc-item rp-link" title="第一章：摘要与多视角判定矩阵" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">第一章：摘要与多视角判定矩阵</span></a><a href="#11-公司摘要及核心结论" class="rp-toc-item rp-link" title="1.1 公司摘要及核心结论" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">1.1 公司摘要及核心结论</span></a><a href="#12-投资视角碰撞矩阵" class="rp-toc-item rp-link" title="1.2 投资视角碰撞矩阵" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">1.2 投资视角碰撞矩阵</span></a><a href="#13-核心分歧点与共识总结" class="rp-toc-item rp-link" title="1.3 核心分歧点与共识总结" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">1.3 核心分歧点与共识总结</span></a><a href="#第二章基础数据与确定性指标分析" class="rp-toc-item rp-link" title="第二章：基础数据与确定性指标分析" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">第二章：基础数据与确定性指标分析</span></a><a href="#21-财务健康度硬指标" class="rp-toc-item rp-link" title="2.1 财务健康度硬指标" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">2.1 财务健康度硬指标</span></a><a href="#22-估值与市场表现" class="rp-toc-item rp-link" title="2.2 估值与市场表现" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">2.2 估值与市场表现</span></a><a href="#23-异常指标自动预警" class="rp-toc-item rp-link" title="2.3 异常指标自动预警" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">2.3 异常指标自动预警</span></a><a href="#第三章经典投资框架深度推演" class="rp-toc-item rp-link" title="第三章：经典投资框架深度推演" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">第三章：经典投资框架深度推演</span></a><a href="#一价值派-巴菲特芒格-视角" class="rp-toc-item rp-link" title="一、价值派 (巴菲特/芒格 视角)" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">一、价值派 (巴菲特/芒格 视角)</span></a><a href="#二成长派-彼得林奇-garp-视角" class="rp-toc-item rp-link" title="二、成长派 (彼得·林奇 GARP 视角)" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">二、成长派 (彼得·林奇 GARP 视角)</span></a><a href="#三风控与做空视角" class="rp-toc-item rp-link" title="三、风控与做空视角" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">三、风控与做空视角</span></a><a href="#第四章数据可追溯性与事实核查" class="rp-toc-item rp-link" title="第四章：数据可追溯性与事实核查" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">第四章：数据可追溯性与事实核查</span></a><a href="#41-关键事实溯源表" class="rp-toc-item rp-link" title="4.1 关键事实溯源表" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">4.1 关键事实溯源表</span></a><a href="#42-审查-agent-修正记录" class="rp-toc-item rp-link" title="4.2 审查 Agent 修正记录" style="padding-left:24px" data-depth="2"><span class="rp-toc-item__text rp-doc">4.2 审查 Agent 修正记录</span></a><a href="#第五章情景推演与投资策略建议" class="rp-toc-item rp-link" title="第五章：情景推演与投资策略建议" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">第五章：情景推演与投资策略建议</span></a></nav><div class="rp-outline__divider"></div><div class="rp-outline__bottom"></div></div></aside></div></div>
+    <div id="__rspress_modal_container"></div>
+  </body>
+</html>
