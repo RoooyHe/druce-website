@@ -26,6 +26,7 @@
 - [快速开始](/druce-website/development/getting-started.md): 从零到跑通 Druce 初步报告模块 Demo，包含依赖安装、密钥配置、启动命令与 mock 模式说明。
 - [代码导览](/druce-website/development/codebase-map.md): PRD 章节、验收标准与 app/ 下各代码模块的映射关系，帮助新贡献者快速定位实现。
 - [本地开发](/druce-website/development/local-dev.md): Druce 项目本地开发指南，涵盖代码规范、测试、文档站本地预览。
+- [PRD v2 AlphaAgent 落地路线图](/druce-website/development/prd-v2-roadmap.md): PRD v2(AlphaAgent 多视角 AI 金融投研助手)与当前 Druce 实现的差距分析及分阶段落地路线图。沉淀自 2026-08-05 grilling session。
 - [部署](/druce-website/development/deployment.md): Druce 文档站（Rspress）部署到 GitHub Pages 的配置说明与流程。
 
 ## 原始 PRD

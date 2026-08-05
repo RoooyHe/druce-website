@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PRD v2 AlphaAgent 落地路线图 - Druce</title>
+<script>{;const saved = localStorage.getItem('rspress-theme-appearance');const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;const defaultTheme = 'auto';const theme = saved === 'light' || saved === 'dark' || saved === 'auto' ? saved : defaultTheme;const isDark = theme === 'auto' ? preferDark : theme === 'dark';document.documentElement.classList.toggle('dark', isDark);document.documentElement.classList.toggle('rp-dark', isDark);document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';}</script>
+<link href="/druce-website/static/css/styles.d460345ad8.css" rel="stylesheet">
+<link rel="preload" href="/druce-website/static/js/async/route-b392377e2df0.787a831577.js" as="script">
+<script defer src="/druce-website/static/js/styles.2cc63ad49f.js"></script>
+<script defer src="/druce-website/static/js/lib-react.c1f7ec5b0c.js"></script>
+<script defer src="/druce-website/static/js/lib-router.7a7ade2827.js"></script>
+<script defer src="/druce-website/static/js/9478.6e664506cf.js"></script>
+<script defer src="/druce-website/static/js/index.0a0f617696.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Rspress v2.0.19">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PRD v2 AlphaAgent 落地路线图 - Druce">
+<meta name="description" content="PRD v2(AlphaAgent 多视角 AI 金融投研助手)与当前 Druce 实现的差距分析及分阶段落地路线图。沉淀自 2026-08-05 grilling session。">
+<meta property="og:description" content="PRD v2(AlphaAgent 多视角 AI 金融投研助手)与当前 Druce 实现的差距分析及分阶段落地路线图。沉淀自 2026-08-05 grilling session。"></head>
+
+  <body>
+    <div id="__rspress_root"><div class="rp-llms-hint" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);clip-path:inset(50%);white-space:nowrap;border:0">For AI agents: the complete documentation index is available at /druce-website/llms.txt, the full documentation bundle is available at /druce-website/llms-full.txt, and this page is available as Markdown at /druce-website/development/prd-v2-roadmap.md.</div><header class="rp-nav"><div class="rp-nav__left"><div class="rp-nav__title"><a href="/druce-website/" class="rp-nav__title__link rp-link"><span>Druce</span></a></div></div><div class="rp-nav__right"><button class="rp-search-button"><div class="rp-search-button__content"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21" class="rp-search-button__icon"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg><span class="rp-search-button__word">Search</span></div><div class="rp-search-button__hotkey" style="opacity:0"><span></span><span>K</span></div></button><div class="rp-search-button--mobile"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 20 21"><path fill="currentColor" d="M8.333 1.913A6.667 6.667 0 0 1 15 8.58c0 1.54-.525 2.957-1.402 4.085l4.49 4.492a.834.834 0 0 1-1.177 1.178l-4.491-4.49a6.64 6.64 0 0 1-4.087 1.402 6.667 6.667 0 0 1 0-13.334m0 1.667a5 5 0 1 0 0 10 5 5 0 0 0 0-10"></path></svg></div><ul class="rp-nav-menu rp-nav-menu--right"><li class="rp-nav-menu__item"><a href="/druce-website/overview/index.html" class="rp-nav-menu__item__container rp-link">产品概览</a></li><li class="rp-nav-menu__item"><a href="/druce-website/features/index.html" class="rp-nav-menu__item__container rp-link">核心功能</a></li><li class="rp-nav-menu__item"><a href="/druce-website/architecture/index.html" class="rp-nav-menu__item__container rp-link">技术架构</a></li><li class="rp-nav-menu__item rp-nav-menu__item--active"><a href="/druce-website/development/index.html" class="rp-nav-menu__item__container rp-link">开发指南</a></li><li class="rp-nav-menu__item"><a href="/druce-website/初步报告生成PRD.html" class="rp-nav-menu__item__container rp-link">原始 PRD</a></li></ul><div class="rp-nav__others"><div class="rp-nav-menu__divider"></div><div class="rp-switch-appearance"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" class="rp-switch-appearance__icon rp-switch-appearance__icon--sun"><path fill="currentColor" d="m7.001 15.848-1.226 1.226a.58.58 0 0 0 0 .818.58.58 0 0 0 .818 0l1.226-1.226a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0m-.352-8.735a.584.584 0 0 0 .825-.825L6.237 5.051a.584.584 0 0 0-.825.825zM5.011 11.07h-1.75a.584.584 0 0 0 0 1.167h1.75c.324 0 .584-.26.584-.583a.585.585 0 0 0-.584-.584m7.003-5.835c.324 0 .584-.26.584-.584V2.9a.58.58 0 0 0-.584-.584.58.58 0 0 0-.583.583V4.65c0 .323.262.584.583.584m5.616 1.621 1.226-1.225a.58.58 0 0 0 0-.818.58.58 0 0 0-.818 0l-1.226 1.225a.58.58 0 0 0 0 .818.576.576 0 0 0 .818 0m3.138 4.214h-1.75a.58.58 0 0 0-.584.584c0 .324.26.584.583.584h1.751a.584.584 0 1 0 0-1.167m-3.389 5.124a.584.584 0 0 0-.825.825l1.238 1.238a.584.584 0 0 0 .825-.826zm-5.365-9.795a5.256 5.256 0 0 0-5.257 5.258 5.256 5.256 0 0 0 5.257 5.257 5.256 5.256 0 0 0 5.257-5.257 5.256 5.256 0 0 0-5.257-5.258m0 11.675a.58.58 0 0 0-.583.583v1.751a.582.582 0 1 0 1.167 0v-1.75a.584.584 0 0 0-.584-.584"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" viewBox="0 0 19 19" class="rp-switch-appearance__icon rp-switch-appearance__icon--moon"><path fill="currentColor" d="M9.166 0a9.2 9.2 0 0 1 1.857.188.834.834 0 0 1 .042 1.623 4.47 4.47 0 1 0 5.457 5.457l.048-.135a.834.834 0 0 1 1.575.177q.186.902.188 1.856A9.168 9.168 0 1 1 9.166 0"></path></svg></div><div class="rp-social-links"><a href="https://github.com/RoooyHe/druce-website" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__sm"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg></button><button aria-label="mobile hamburger" class="rp-nav-hamburger rp-nav-hamburger__md"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="none" viewBox="0 0 21 21"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="M3.645 5.225h13.333M3.645 10.225h13.333M3.645 15.225h13.333"></path></svg><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"><div class="rp-nav-menu__others-mobile__container"><div class="rp-nav-hamburger__md__hover-group"><div class="rp-nav-screen-appearance"><div class="rp-nav-screen-appearance__left">Theme</div><div class="rp-nav-screen-appearance__right"></div></div><div class="rp-nav-screen-divider"></div><div class="rp-social-links"><a href="https://github.com/RoooyHe/druce-website" target="_blank" rel="noopener noreferrer" class="rp-social-links__item"><div class="rp-social-links__icon"><div class="rp-social-links__icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12c0 5.303 3.438 9.8 8.205 11.385c.6.113.82-.258.82-.577c0-.285-.01-1.04-.015-2.04c-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729c1.205.084 1.838 1.236 1.838 1.236c1.07 1.835 2.809 1.305 3.495.998c.108-.776.417-1.305.76-1.605c-2.665-.3-5.466-1.332-5.466-5.93c0-1.31.465-2.38 1.235-3.22c-.135-.303-.54-1.523.105-3.176c0 0 1.005-.322 3.3 1.23c.96-.267 1.98-.399 3-.405c1.02.006 2.04.138 3 .405c2.28-1.552 3.285-1.23 3.285-1.23c.645 1.653.24 2.873.12 3.176c.765.84 1.23 1.91 1.23 3.22c0 4.61-2.805 5.625-5.475 5.92c.42.36.81 1.096.81 2.22c0 1.606-.015 2.896-.015 3.286c0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div></a><ul class="rp-hover-group rp-hover-group--hidden rp-hover-group--right"></ul></div></div></div></ul></button></div></header><div class="rp-doc-layout__menu"><div class="rp-sidebar-menu"><button type="button" class="rp-sidebar-menu__left"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M4 6h24v2H4zm0 18h24v2H4zm0-12h24v2H4zm0 6h24v2H4z"></path></svg><span>Menu</span></button><button type="button" class="rp-sidebar-menu__right"><span class="rp-sidebar-menu__right__text">ON THIS PAGE</span><svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-sidebar-menu__right__icon" style="transform:rotate(0deg);transition:transform 0.2s ease-out"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></button></div></div><div class="rp-doc-layout__container"><aside class="rp-doc-layout__sidebar rp-scrollbar"><a href="/druce-website/overview/index.html" class="rp-sidebar-item rp-sidebar-group rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">产品概览</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></a><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/overview/index.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">产品定位</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/overview/users.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">目标用户与场景</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/overview/scenarios.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">Demo 展示场景</span></div><div class="rp-sidebar-item__right"></div></a></div></div><a href="/druce-website/features/index.html" class="rp-sidebar-item rp-sidebar-group rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">核心功能</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></a><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/features/index.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">核心功能概览</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/features/prd-version2.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">AlphaAgent PRD v2</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/features/acceptance.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">验收标准</span></div><div class="rp-sidebar-item__right"></div></a></div></div><a href="/druce-website/architecture/index.html" class="rp-sidebar-item rp-sidebar-group rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">技术架构</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></a><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/architecture/index.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">技术栈</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/architecture/data-flow.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">数据流</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/architecture/data-sources.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">数据来源策略</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/architecture/road-map.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">演进路线</span></div><div class="rp-sidebar-item__right"></div></a></div></div><div class="rp-sidebar-item rp-sidebar-group" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">开发指南</span></div><div class="rp-sidebar-item__right"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></div><div style="display:grid;grid-template-rows:1fr;transition:grid-template-rows 0.2s ease-out"><div style="overflow:hidden"><a href="/druce-website/development/getting-started.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">快速开始</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/development/codebase-map.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">代码导览</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/development/local-dev.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">本地开发</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/development/prd-v2-roadmap.html" class="rp-sidebar-item rp-sidebar-item--active rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">PRD v2 落地路线图</span></div><div class="rp-sidebar-item__right"></div></a><a href="/druce-website/development/deployment.html" class="rp-sidebar-item rp-sidebar-item--group-item rp-link" style="padding-left:calc(12px * 1 + 12px)" data-depth="1"><div class="rp-sidebar-item__left"><span class="rp-doc">部署</span></div><div class="rp-sidebar-item__right"></div></a></div></div><a href="/druce-website/初步报告生成PRD.html" class="rp-sidebar-item rp-link" style="padding-left:12px" data-depth="0"><div class="rp-sidebar-item__left"><span class="rp-doc">原始 PRD</span></div><div class="rp-sidebar-item__right"></div></a></aside><div class="rp-doc-layout__doc"><main class="rp-doc-layout__doc-container"><div class="rp-doc rspress-doc"><!--$--><h1 class="rp-toc-include" id="prd-v2-alphaagent-落地路线图"><a href="#prd-v2-alphaagent-落地路线图" class="rp-header-anchor rp-link" aria-hidden="true">#</a>PRD v2 AlphaAgent 落地路线图<!-- --> </h1><div class="rp-not-doc rp-llms-container"><button class="rp-not-doc rp-llms-button rp-llms-copy-button"><div class="rp-llms-copy-button__icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-llms-copy-button__icon-copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg></div><span>Copy Markdown</span></button><button class="rp-llms-button rp-llms-view-options__trigger "><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-llms-view-options__arrow "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button></div>
+<blockquote>
+<p>本文档沉淀自 2026-08-05 grilling session(5 轮 14 拍板点)。
+架构决策详见 ADR-0004(仓库根 <code>docs/adr/0004-prd-v2-alphaagent-architecture.md</code>),
+领域术语详见仓库根 <code>CONTEXT.md</code>。</p>
+</blockquote>
+<h2 class="rp-toc-include" id="1-定位prd-v2-与当前-druce-的关系"><a href="#1-定位prd-v2-与当前-druce-的关系" class="rp-header-anchor rp-link" aria-hidden="true">#</a>1. 定位:PRD v2 与当前 Druce 的关系</h2>
+<p>PRD v2 标题为「AlphaAgent — 多视角 AI 金融投研助手」,描述的是一个<strong>与当前 Druce 不同的产品形态</strong>。</p>
+<p>grilling 第 1 轮拍板:<strong>两者关系为「叠加 (B)」</strong>——</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>维度</th><th>当前 Druce(路径 1)</th><th>PRD v2 AlphaAgent(路径 2)</th></tr></thead><tbody><tr><td>数据基底</td><td>Tavily/Bing 搜索 + 巨潮资讯抓取</td><td>AKShare(Python 财务数据接口)+ 巨潮资讯 PDF 解析</td></tr><tr><td>Agent 架构</td><td>单 LLM 拼四段报告</td><td>多 Agent(价值/成长/风控)并行推演 + Debate 汇总 + Auditor 核查</td></tr><tr><td>输出形态</td><td>四段(摘要/分点/风险/参考)</td><td>五章(摘要矩阵/确定性指标/框架推演/事实核查/情景推演)</td></tr></tbody></table></div>
+<p><strong>两路并存,用户可选「广域搜集报告」(路径 1)或「AlphaAgent 研报」(路径 2)。</strong></p>
+<h2 class="rp-toc-include" id="2-差距分析prd-v2-四模块-vs-当前实现"><a href="#2-差距分析prd-v2-四模块-vs-当前实现" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2. 差距分析:PRD v2 四模块 vs 当前实现</h2>
+<p>PRD v2 的 4 个新模块在当前 Druce 代码里<strong>完全没有任何前身可演进</strong>(grilling 1.2 拍板),均为绿地新建。</p>
+<h3 class="rp-toc-include" id="21-模块一数据采集与确定性计算引擎-data-engine"><a href="#21-模块一数据采集与确定性计算引擎-data-engine" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.1 模块一:数据采集与确定性计算引擎 (Data Engine)</h3>
+<p><strong>PRD v2 要求</strong>:</p>
+<ul>
+<li>数据源:AKShare(行情/财务报表)+ 巨潮资讯(公告/财报 PDF)+ Tavily/Serper(新闻/舆情)</li>
+<li>自动提取近 3~5 年三大财务报表</li>
+<li>Python 侧确定性计算 ROE、毛利率、净利率、资产负债率、PEG、应收账款周转天数等</li>
+<li>规则预警打标 <code>[Anomaly_Tag]</code></li>
+</ul>
+<p><strong>当前实现差距</strong>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>差距项</th><th>当前状态</th><th>差距性质</th></tr></thead><tbody><tr><td>AKShare 接入</td><td>无</td><td>绿地新建</td></tr><tr><td>三大报表字段化提取</td><td>无</td><td>绿地新建</td></tr><tr><td>确定性财务比率计算</td><td>无</td><td>绿地新建</td></tr><tr><td>异常规则打标</td><td>无</td><td>绿地新建</td></tr><tr><td>新闻/舆情数据源</td><td><code>app/search.py</code> 已有 Tavily/Bing</td><td><strong>复用,无需新建</strong></td></tr></tbody></table></div>
+<p><strong>关键决策(grilling 2.1 拍板 b)</strong>:路径 2 的新闻/舆情<strong>复用路径 1 的 <code>search.py</code></strong>,AKShare 只管财报/行情,避免双搜索栈和 fallback 幻觉。</p>
+<h3 class="rp-toc-include" id="22-模块二多视角投资框架-agent-3-个推演-agent"><a href="#22-模块二多视角投资框架-agent-3-个推演-agent" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.2 模块二:多视角投资框架 Agent (3 个推演 Agent)</h3>
+<p><strong>PRD v2 要求</strong>:</p>
+<ul>
+<li>价值派 Agent(巴菲特/芒格):护城河、ROE 稳定性、FCF、债务风险</li>
+<li>成长派 Agent(彼得·林奇 GARP):营收/净利增速、PEG、存货匹配度</li>
+<li>风控派 Agent:财报隐患、非经常性损益占比、现金流断裂隐患</li>
+<li>每个 Agent 有「核心指标与定量阈值表」+「代码/Prompt 硬性判定规则」</li>
+</ul>
+<p><strong>当前实现差距</strong>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>差距项</th><th>当前状态</th><th>差距性质</th></tr></thead><tbody><tr><td>价值派 Agent</td><td>无</td><td>绿地新建</td></tr><tr><td>成长派 Agent</td><td>无</td><td>绿地新建</td></tr><tr><td>风控派 Agent</td><td>无</td><td>绿地新建</td></tr><tr><td>阈值表 prompt 结构</td><td>无</td><td>绿地新建</td></tr></tbody></table></div>
+<p><strong>关键决策(grilling 2.2 拍板)</strong>:门槛逻辑<strong>写 prompt</strong>(时间有限,没法调算法)。已知风险:LLM 可能把 14.8% 判成 pass(差不多),幻觉风险回来。兜底项:最终交付前把关键门槛从 prompt 抽到 Python 确定性判断。</p>
+<p><strong>关键决策(grilling 3.1 拍板 b)</strong>:3 个推演 Agent <strong>串行</strong>调用 LLM(非并行)。已知风险:串行延迟可能把单次研报从 1-3 分钟推到 8-15 分钟,顶 AC-05 的 15 分钟上限。</p>
+<p><strong>关键决策(grilling 3.2 拍板 e)</strong>:推演 Agent 用 <strong>DeepSeek</strong>(便宜),Debate 用 <strong>GPT-4o</strong>(强)。<code>app/llm.py</code> 需改成多 provider 路由。</p>
+<h3 class="rp-toc-include" id="23-模块三分歧辩论与综合研判-agent-debate-agent"><a href="#23-模块三分歧辩论与综合研判-agent-debate-agent" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.3 模块三:分歧辩论与综合研判 Agent (Debate Agent)</h3>
+<p><strong>PRD v2 要求</strong>:</p>
+<ul>
+<li>汇总 3 个推演 Agent 评估结果</li>
+<li>生成多视角对比矩阵(Dashboard 表格)</li>
+<li>提取共识点、梳理核心争议点</li>
+<li>给出分人群操作建议</li>
+</ul>
+<p><strong>当前实现差距</strong>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>差距项</th><th>当前状态</th><th>差距性质</th></tr></thead><tbody><tr><td>多视角汇总逻辑</td><td>无</td><td>绿地新建</td></tr><tr><td>共识/分歧提取</td><td>无</td><td>绿地新建</td></tr><tr><td>分人群操作建议</td><td>无</td><td>绿地新建</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="24-模块四反思核查与数据可追溯模块-auditor-agent"><a href="#24-模块四反思核查与数据可追溯模块-auditor-agent" class="rp-header-anchor rp-link" aria-hidden="true">#</a>2.4 模块四:反思核查与数据可追溯模块 (Auditor Agent)</h3>
+<p><strong>PRD v2 要求</strong>:</p>
+<ul>
+<li>溯源标注:对报告中每一个具体财务数据,自动附带出处索引</li>
+<li>文本 vs Data Engine 数据二次比对</li>
+<li>若发现数字不符或无中生有,打回重写</li>
+</ul>
+<p><strong>当前实现差距</strong>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>差距项</th><th>当前状态</th><th>差距性质</th></tr></thead><tbody><tr><td>财报数据溯源标注</td><td>无</td><td>绿地新建</td></tr><tr><td>报告数字 vs AKShare 原始数据比对</td><td>无</td><td>绿地新建</td></tr><tr><td>不符则打回重写的回环</td><td>无</td><td>绿地新建</td></tr></tbody></table></div>
+<p><strong>关键决策(grilling 2.3 拍板 ii)</strong>:路径 2 的 Auditor Agent 与路径 1 的 <code>cross_validate</code> <strong>互不干涉</strong>。路径 2 Auditor 只管&quot;研究报告里的数字 vs AKShare 原始数据比对&quot;,路径 1 cross_validate 只管&quot;信源数量/权威/冲突&quot;。</p>
+<h2 class="rp-toc-include" id="3-架构决策汇总"><a href="#3-架构决策汇总" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3. 架构决策汇总</h2>
+<h3 class="rp-toc-include" id="31-代码组织grilling-41-拍板-a"><a href="#31-代码组织grilling-41-拍板-a" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.1 代码组织(grilling 4.1 拍板 a)</h3>
+<div class="rp-codeblock language-txt"><div class="rp-codeblock__content rp-codeblock__content--line-numbers"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="txt"><code><span class="line"><span>app/</span></span>
+<span class="line"><span>├── agents/                    # 新建:多 Agent 推演</span></span>
+<span class="line"><span>│   ├── value_agent.py         # 价值派(巴菲特/芒格)</span></span>
+<span class="line"><span>│   ├── growth_agent.py        # 成长派(彼得·林奇 GARP)</span></span>
+<span class="line"><span>│   ├── risk_agent.py          # 风控派</span></span>
+<span class="line"><span>│   ├── debate_agent.py        # 分歧辩论与综合研判</span></span>
+<span class="line"><span>│   └── auditor_agent.py       # 反思核查与数据可追溯</span></span>
+<span class="line"><span>├── dataengine/                # 新建:AKShare + 确定性计算</span></span>
+<span class="line"><span>│   ├── akshare_client.py      # AKShare 接入</span></span>
+<span class="line"><span>│   ├── financial_statements.py # 三大报表字段化提取</span></span>
+<span class="line"><span>│   ├── ratios.py              # 确定性财务比率计算</span></span>
+<span class="line"><span>│   └── anomaly_tags.py        # 异常规则打标</span></span>
+<span class="line"><span>├── search.py                  # 留顶层不动(避免连锁 import 改动)</span></span>
+<span class="line"><span>├── pipeline.py                # 路径 1 编排(现有)</span></span>
+<span class="line"><span>├── pipeline_v2.py             # 新建:路径 2 编排</span></span>
+<span class="line"><span>├── llm.py                     # 改造:单 provider → 多 provider 路由</span></span>
+<span class="line"><span>├── report.py                  # 路径 1 报告生成(现有)</span></span>
+<span class="line"><span>├── streamlit_app.py           # 入口,加路由:用户选路径 1 或路径 2</span></span>
+<span class="line"><span>└── ... (其他现有文件不动)</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap" aria-label="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h3 class="rp-toc-include" id="32-llm-多-provider-路由grilling-32-拍板-e"><a href="#32-llm-多-provider-路由grilling-32-拍板-e" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.2 LLM 多 provider 路由(grilling 3.2 拍板 e)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>Agent 角色</th><th>LLM</th><th>理由</th></tr></thead><tbody><tr><td>价值派 / 成长派 / 风控派</td><td>DeepSeek</td><td>便宜,推演逻辑可由 prompt 引导</td></tr><tr><td>Debate Agent</td><td>GPT-4o</td><td>强,做汇总裁决质量更高</td></tr><tr><td>Auditor Agent</td><td>DeepSeek</td><td>便宜,做数字比对逻辑性强</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="33-akshare-数据缓存grilling-43-拍板-i"><a href="#33-akshare-数据缓存grilling-43-拍板-i" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.3 AKShare 数据缓存(grilling 4.3 拍板 i)</h3>
+<ul>
+<li>拉到的财报数据存 <code>data/{company}_{report_period}.json</code></li>
+<li>财报缓存 TTL 7 天(财报一年 4 次更新)</li>
+<li>行情缓存 TTL 1 天</li>
+<li>轻量,Druce 单用户无并发问题,<code>data/</code> 目录 git-ignorable</li>
+</ul>
+<h3 class="rp-toc-include" id="34-落地顺序--拓扑序grilling-52-拍板-e"><a href="#34-落地顺序--拓扑序grilling-52-拍板-e" class="rp-header-anchor rp-link" aria-hidden="true">#</a>3.4 落地顺序 — 拓扑序(grilling 5.2 拍板 e)</h3>
+<div class="rp-codeblock language-txt"><div class="rp-codeblock__content rp-codeblock__content--line-numbers"><div class="rp-codeblock__content__scroll-container rp-scrollbar rp-scrollbar--always"><pre class="shiki css-variables" style="background-color:var(--shiki-background);color:var(--shiki-foreground)" tabindex="0" data-lang="txt"><code><span class="line"><span>Data Engine (AKShare + 确定性计算)</span></span>
+<span class="line"><span>        ↓</span></span>
+<span class="line"><span>[Value ‖ Growth ‖ Risk]  3 个推演 Agent</span></span>
+<span class="line"><span>        ↓</span></span>
+<span class="line"><span>Debate Agent (汇总)</span></span>
+<span class="line"><span>        ↓</span></span>
+<span class="line"><span>Auditor Agent (核查)</span></span></code></pre></div><div class="rp-code-button-group"><button class="rp-code-button-group__button rp-code-wrap-button" title="Toggle code wrap" aria-label="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrapped"><path fill="currentColor" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-button-group__icon--wrap"><path fill="currentColor" d="M16 7H3V5h13zM3 19h13v-2H3zm19-7-4-3v2H3v2h15v2z"></path></svg></button><button class="rp-code-button-group__button rp-code-copy-button" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--copy"><path fill="currentColor" d="M20 8v12H8V8zm0-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2"></path><path fill="currentColor" d="M4 16H2V4a2 2 0 0 1 2-2h12v2H4Z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="rp-code-button-group__icon rp-code-copy-button__icon rp-code-copy-button__icon--success"><path fill="currentColor" d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"></path></svg></button></div></div></div>
+<h2 class="rp-toc-include" id="4-roadmap分阶段落地"><a href="#4-roadmap分阶段落地" class="rp-header-anchor rp-link" aria-hidden="true">#</a>4. Roadmap:分阶段落地</h2>
+<h3 class="rp-toc-include" id="milestone-0基础设施改造前置"><a href="#milestone-0基础设施改造前置" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Milestone 0:基础设施改造(前置)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>任务</th><th>说明</th><th>依赖</th></tr></thead><tbody><tr><td><code>app/llm.py</code> 多 provider 路由</td><td>支持 DeepSeek + GPT-4o 切换,按 Agent 角色路由</td><td>无</td></tr><tr><td>新建 <code>app/agents/</code> 目录结构</td><td>空目录 + <code>__init__.py</code></td><td>无</td></tr><tr><td>新建 <code>app/dataengine/</code> 目录结构</td><td>空目录 + <code>__init__.py</code></td><td>无</td></tr><tr><td>新建 <code>app/pipeline_v2.py</code> 骨架</td><td>空函数 + emit 进度回调</td><td>无</td></tr><tr><td><code>data/</code> 目录 + <code>.gitignore</code></td><td>AKShare 缓存目录,git-ignorable</td><td>无</td></tr></tbody></table></div>
+<h3 class="rp-toc-include" id="milestone-1data-engineakshare--确定性计算"><a href="#milestone-1data-engineakshare--确定性计算" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Milestone 1:Data Engine(AKShare + 确定性计算)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>任务</th><th>说明</th><th>依赖</th></tr></thead><tbody><tr><td><code>akshare_client.py</code></td><td>AKShare 接入,封装行情/财务报表拉取</td><td>M0</td></tr><tr><td><code>financial_statements.py</code></td><td>三大报表(资产负债表/利润表/现金流量表)字段化提取,近 3~5 年</td><td>M1.akshare_client</td></tr><tr><td><code>ratios.py</code></td><td>确定性计算 ROE、毛利率、净利率、资产负债率、PEG、应收账款周转天数、经营性现金流/净利润比值</td><td>M1.financial_statements</td></tr><tr><td><code>anomaly_tags.py</code></td><td>异常规则打标:应收账款增速 &gt; 营收增速 + 15% 等,自动打 <code>[Anomaly_Tag]</code></td><td>M1.ratios</td></tr><tr><td>文件缓存</td><td><code>data/{company}_{report_period}.json</code>,财报 TTL 7 天,行情 TTL 1 天</td><td>M1.akshare_client</td></tr></tbody></table></div>
+<p><strong>验收标准(Milestone 1)</strong>:</p>
+<ul>
+<li>输入股票代码,能拉到近 3~5 年三大报表</li>
+<li>确定性计算出 PRD v2 第三章所有 Agent 需要的比率</li>
+<li>异常规则触发时正确打标</li>
+<li>重复请求同一公司同一报告期命中缓存</li>
+</ul>
+<h3 class="rp-toc-include" id="milestone-23-个推演-agent"><a href="#milestone-23-个推演-agent" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Milestone 2:3 个推演 Agent</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>任务</th><th>说明</th><th>依赖</th></tr></thead><tbody><tr><td><code>value_agent.py</code></td><td>价值派 Agent:护城河、ROE 稳定性、FCF、债务风险,门槛逻辑写 prompt</td><td>M1</td></tr><tr><td><code>growth_agent.py</code></td><td>成长派 Agent:营收/净利增速、PEG、存货匹配度,门槛逻辑写 prompt</td><td>M1</td></tr><tr><td><code>risk_agent.py</code></td><td>风控派 Agent:财报隐患、非经常性损益占比、现金流断裂隐患,门槛逻辑写 prompt</td><td>M1</td></tr><tr><td>推演 Agent prompt 模板</td><td>每个 Agent 的阈值表 + 硬性判定规则 prompt 结构</td><td>M2.value/growth/risk</td></tr></tbody></table></div>
+<p><strong>验收标准(Milestone 2)</strong>:</p>
+<ul>
+<li>输入确定性计算结果,3 个 Agent 各自输出【看多/观望/看空】(或【低/中/高风险】)+ 逻辑叙述</li>
+<li>串行调用,延迟可接受(暂不卡 AC-05)</li>
+<li>3 个 Agent 用 DeepSeek</li>
+</ul>
+<h3 class="rp-toc-include" id="milestone-3debate-agent汇总"><a href="#milestone-3debate-agent汇总" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Milestone 3:Debate Agent(汇总)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>任务</th><th>说明</th><th>依赖</th></tr></thead><tbody><tr><td><code>debate_agent.py</code></td><td>汇总 3 个推演 Agent 结果,生成多视角对比矩阵,提取共识/分歧,给出分人群操作建议</td><td>M2</td></tr><tr><td>Debate prompt 模板</td><td>输入 3 个推演输出,输出第一章「摘要与多视角判定矩阵」+ 第五章「情景推演与投资策略建议」</td><td>M3.debate_agent</td></tr></tbody></table></div>
+<p><strong>验收标准(Milestone 3)</strong>:</p>
+<ul>
+<li>输入 3 个推演 Agent 输出,Debate 生成多视角对比矩阵 + 共识/分歧 + 分人群操作建议</li>
+<li>Debate 用 GPT-4o</li>
+<li>延迟可接受</li>
+</ul>
+<h3 class="rp-toc-include" id="milestone-4auditor-agent核查"><a href="#milestone-4auditor-agent核查" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Milestone 4:Auditor Agent(核查)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>任务</th><th>说明</th><th>依赖</th></tr></thead><tbody><tr><td><code>auditor_agent.py</code></td><td>溯源标注:对报告中每一个具体财务数据自动附带出处索引;文本 vs Data Engine 数据二次比对;不符则打回重写</td><td>M1 + M3</td></tr><tr><td>Auditor prompt 模板</td><td>输入 Debate 报告 + AKShare 原始数据,输出第四章「数据可追溯性与事实核查」</td><td>M4.auditor_agent</td></tr></tbody></table></div>
+<p><strong>验收标准(Milestone 4)</strong>:</p>
+<ul>
+<li>输入 Debate 报告 + AKShare 原始数据,Auditor 输出溯源表 + 修正记录</li>
+<li>报告里的数字与 AKShare 原始数据不符时,标记并打回</li>
+<li>Auditor 用 DeepSeek</li>
+</ul>
+<h3 class="rp-toc-include" id="milestone-5pipeline_v2-串联--streamlit-路由"><a href="#milestone-5pipeline_v2-串联--streamlit-路由" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Milestone 5:pipeline_v2 串联 + Streamlit 路由</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>任务</th><th>说明</th><th>依赖</th></tr></thead><tbody><tr><td><code>pipeline_v2.py</code> 串联</td><td>Data Engine → 3 推演 Agent → Debate → Auditor,emit 进度回调</td><td>M1-M4</td></tr><tr><td><code>streamlit_app.py</code> 路由</td><td>用户选「广域搜集报告」(路径 1)或「AlphaAgent 研报」(路径 2)</td><td>M5.pipeline_v2</td></tr><tr><td>五章输出渲染</td><td>将路径 2 的结构化输出渲染为 PRD v2 第五章规范</td><td>M5.pipeline_v2</td></tr></tbody></table></div>
+<p><strong>验收标准(Milestone 5)</strong>:</p>
+<ul>
+<li>Streamlit 用户可选路径 1 或路径 2</li>
+<li>路径 2 端到端跑通,输出五章 Markdown 研报</li>
+<li>路径 1(广域搜集报告)不受影响,继续可用</li>
+</ul>
+<h3 class="rp-toc-include" id="milestone-6已知风险兜底最终交付前"><a href="#milestone-6已知风险兜底最终交付前" class="rp-header-anchor rp-link" aria-hidden="true">#</a>Milestone 6:已知风险兜底(最终交付前)</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>任务</th><th>说明</th><th>依赖</th></tr></thead><tbody><tr><td>关键门槛从 prompt 抽到 Python 确定性判断</td><td>grilling 2.2 已知风险兜底:LLM 可能把 14.8% 判成 pass,关键门槛最终抽到 Python</td><td>M2</td></tr><tr><td>串行延迟监控</td><td>grilling 3.1 已知风险兜底:若串行延迟顶到 AC-05 的 15 分钟,后续异步化或并行化</td><td>M5</td></tr></tbody></table></div>
+<h2 class="rp-toc-include" id="5-与现有-adr-的关系"><a href="#5-与现有-adr-的关系" class="rp-header-anchor rp-link" aria-hidden="true">#</a>5. 与现有 ADR 的关系</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>ADR</th><th>状态</th><th>与 PRD v2 的关系</th></tr></thead><tbody><tr><td>ADR-0001 单用户为主</td><td>待重新评估</td><td>PRD v2 不改这个判定,路径 2 仍单用户</td></tr><tr><td>ADR-0002 Celery+Redis</td><td>deprecated</td><td>PRD v2 的串行拓扑不依赖异步队列,ADR-0002 的 deprecated 判定不变</td></tr><tr><td>ADR-0003 持续对话 Agent</td><td>active → <strong>暂停</strong></td><td>PRD v2 优先,ADR-0003 暂停(grilling 5.1 拍板)</td></tr><tr><td><strong>ADR-0004 PRD v2 AlphaAgent 架构</strong></td><td><strong>active</strong></td><td>本 roadmap 的架构决策来源</td></tr></tbody></table></div>
+<h2 class="rp-toc-include" id="6-暂停项adr-0003-持续对话-agent"><a href="#6-暂停项adr-0003-持续对话-agent" class="rp-header-anchor rp-link" aria-hidden="true">#</a>6. 暂停项:ADR-0003 持续对话 Agent</h2>
+<p>grilling 5.1 拍板:<strong>PRD v2 优先,ADR-0003 暂停</strong>。</p>
+<p>理由:</p>
+<ul>
+<li>PRD v2 是产品经理提出的新版需求,优先级高于内部演进</li>
+<li>PRD v2 的多 Agent 研报落地后,反过来会重塑 ADR-0003 的对话记忆颗粒度——对话要引用&quot;价值派的护城河评分&quot;,而不是引用现有 DataPoint</li>
+<li>先把 PRD v2 跑通,ADR-0003 等尘埃落定再续</li>
+</ul>
+<h2 class="rp-toc-include" id="7-验收标准prd-v2-整体"><a href="#7-验收标准prd-v2-整体" class="rp-header-anchor rp-link" aria-hidden="true">#</a>7. 验收标准(PRD v2 整体)</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="rp-table-scroll-container rp-scrollbar"><table><thead><tr><th>编号</th><th>验收项</th><th>标准</th><th>对应 Milestone</th></tr></thead><tbody><tr><td>AC-V2-01</td><td>AKShare 接入</td><td>输入股票代码,能拉到近 3~5 年三大报表 + 行情</td><td>M1</td></tr><tr><td>AC-V2-02</td><td>确定性计算</td><td>Python 侧计算出 PRD v2 第三章所有 Agent 需要的比率</td><td>M1</td></tr><tr><td>AC-V2-03</td><td>异常打标</td><td>触发异常规则时正确打 <code>[Anomaly_Tag]</code></td><td>M1</td></tr><tr><td>AC-V2-04</td><td>价值派 Agent</td><td>输入确定性计算结果,输出【看多/观望/看空】+ 护城河逻辑 + 最关心风险</td><td>M2</td></tr><tr><td>AC-V2-05</td><td>成长派 Agent</td><td>输入确定性计算结果,输出【看多/观望/看空】+ 成长匹配度逻辑 + 拓展潜力</td><td>M2</td></tr><tr><td>AC-V2-06</td><td>风控派 Agent</td><td>输入确定性计算结果,输出【低/中/高风险】+ 核心财务隐患清单</td><td>M2</td></tr><tr><td>AC-V2-07</td><td>Debate Agent</td><td>输入 3 个推演输出,生成多视角对比矩阵 + 共识/分歧 + 分人群操作建议</td><td>M3</td></tr><tr><td>AC-V2-08</td><td>Auditor Agent</td><td>输入 Debate 报告 + AKShare 原始数据,输出溯源表 + 修正记录,数字不符则打回</td><td>M4</td></tr><tr><td>AC-V2-09</td><td>五章输出</td><td>路径 2 输出严格遵循 PRD v2 第五章规范(五章 Markdown 研报)</td><td>M5</td></tr><tr><td>AC-V2-10</td><td>双路共存</td><td>Streamlit 用户可选路径 1(广域搜集报告)或路径 2(AlphaAgent 研报),路径 1 不受影响</td><td>M5</td></tr><tr><td>AC-V2-11</td><td>延迟可控</td><td>单次研报 ≤ 15 分钟(AC-05),串行拓扑下监控延迟</td><td>M5 + M6</td></tr></tbody></table></div><!--/$--></div><footer class="rp-doc-footer"><div class="rp-doc-footer__edit"></div><div class="rp-doc-footer__divider"></div><div class="rp-prev-next-page"><a href="/druce-website/development/local-dev.html" class="rp-prev-next-page__item rp-prev-next-page__prev rp-link"><span class="rp-prev-next-page__item__desc">Previous page</span><span class="rp-prev-next-page__item__title"><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-prev-next-page__icon rp-prev-next-page__rotate_180"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg><span>本地开发</span></span></a><a href="/druce-website/development/deployment.html" class="rp-prev-next-page__item rp-prev-next-page__next rp-link"><span class="rp-prev-next-page__item__desc">Next page</span><span class="rp-prev-next-page__item__title"><span>部署</span><svg width="1em" height="1em" viewBox="0 0 32 32" class="rp-prev-next-page__icon"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></span></a></div></footer></main></div><aside class="rp-doc-layout__outline rp-scrollbar"><div class="rp-outline"><div class="rp-outline__title">ON THIS PAGE<svg width="14" height="14" class="rp-progress-circle"><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-divider-light)" stroke-width="2"></circle><circle cx="7" cy="7" r="6" stroke-linecap="round" fill="none" stroke="var(--rp-c-brand)" stroke-width="2" stroke-dasharray="37.69911184307752" stroke-dashoffset="37.69911184307752" transform="rotate(-90 7 7)" style="transition:stroke-dashoffset 0.3s"></circle></svg></div><nav class="rp-outline__toc rp-scrollbar"><a href="#1-定位prd-v2-与当前-druce-的关系" class="rp-toc-item rp-link" title="1. 定位:PRD v2 与当前 Druce 的关系" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">1. 定位:PRD v2 与当前 Druce 的关系</span></a><a href="#2-差距分析prd-v2-四模块-vs-当前实现" class="rp-toc-item rp-link" title="2. 差距分析:PRD v2 四模块 vs 当前实现" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">2. 差距分析:PRD v2 四模块 vs 当前实现</span></a><a href="#21-模块一数据采集与确定性计算引擎-data-engine" class="rp-toc-item rp-link" title="2.1 模块一:数据采集与确定性计算引擎 (Data Engine)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2.1 模块一:数据采集与确定性计算引擎 (Data Engine)</span></a><a href="#22-模块二多视角投资框架-agent-3-个推演-agent" class="rp-toc-item rp-link" title="2.2 模块二:多视角投资框架 Agent (3 个推演 Agent)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2.2 模块二:多视角投资框架 Agent (3 个推演 Agent)</span></a><a href="#23-模块三分歧辩论与综合研判-agent-debate-agent" class="rp-toc-item rp-link" title="2.3 模块三:分歧辩论与综合研判 Agent (Debate Agent)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2.3 模块三:分歧辩论与综合研判 Agent (Debate Agent)</span></a><a href="#24-模块四反思核查与数据可追溯模块-auditor-agent" class="rp-toc-item rp-link" title="2.4 模块四:反思核查与数据可追溯模块 (Auditor Agent)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">2.4 模块四:反思核查与数据可追溯模块 (Auditor Agent)</span></a><a href="#3-架构决策汇总" class="rp-toc-item rp-link" title="3. 架构决策汇总" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">3. 架构决策汇总</span></a><a href="#31-代码组织grilling-41-拍板-a" class="rp-toc-item rp-link" title="3.1 代码组织(grilling 4.1 拍板 a)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.1 代码组织(grilling 4.1 拍板 a)</span></a><a href="#32-llm-多-provider-路由grilling-32-拍板-e" class="rp-toc-item rp-link" title="3.2 LLM 多 provider 路由(grilling 3.2 拍板 e)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.2 LLM 多 provider 路由(grilling 3.2 拍板 e)</span></a><a href="#33-akshare-数据缓存grilling-43-拍板-i" class="rp-toc-item rp-link" title="3.3 AKShare 数据缓存(grilling 4.3 拍板 i)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.3 AKShare 数据缓存(grilling 4.3 拍板 i)</span></a><a href="#34-落地顺序--拓扑序grilling-52-拍板-e" class="rp-toc-item rp-link" title="3.4 落地顺序 — 拓扑序(grilling 5.2 拍板 e)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">3.4 落地顺序 — 拓扑序(grilling 5.2 拍板 e)</span></a><a href="#4-roadmap分阶段落地" class="rp-toc-item rp-link" title="4. Roadmap:分阶段落地" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">4. Roadmap:分阶段落地</span></a><a href="#milestone-0基础设施改造前置" class="rp-toc-item rp-link" title="Milestone 0:基础设施改造(前置)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Milestone 0:基础设施改造(前置)</span></a><a href="#milestone-1data-engineakshare--确定性计算" class="rp-toc-item rp-link" title="Milestone 1:Data Engine(AKShare + 确定性计算)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Milestone 1:Data Engine(AKShare + 确定性计算)</span></a><a href="#milestone-23-个推演-agent" class="rp-toc-item rp-link" title="Milestone 2:3 个推演 Agent" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Milestone 2:3 个推演 Agent</span></a><a href="#milestone-3debate-agent汇总" class="rp-toc-item rp-link" title="Milestone 3:Debate Agent(汇总)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Milestone 3:Debate Agent(汇总)</span></a><a href="#milestone-4auditor-agent核查" class="rp-toc-item rp-link" title="Milestone 4:Auditor Agent(核查)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Milestone 4:Auditor Agent(核查)</span></a><a href="#milestone-5pipeline_v2-串联--streamlit-路由" class="rp-toc-item rp-link" title="Milestone 5:pipeline_v2 串联 + Streamlit 路由" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Milestone 5:pipeline_v2 串联 + Streamlit 路由</span></a><a href="#milestone-6已知风险兜底最终交付前" class="rp-toc-item rp-link" title="Milestone 6:已知风险兜底(最终交付前)" style="padding-left:12px" data-depth="1"><span class="rp-toc-item__text rp-doc">Milestone 6:已知风险兜底(最终交付前)</span></a><a href="#5-与现有-adr-的关系" class="rp-toc-item rp-link" title="5. 与现有 ADR 的关系" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">5. 与现有 ADR 的关系</span></a><a href="#6-暂停项adr-0003-持续对话-agent" class="rp-toc-item rp-link" title="6. 暂停项:ADR-0003 持续对话 Agent" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">6. 暂停项:ADR-0003 持续对话 Agent</span></a><a href="#7-验收标准prd-v2-整体" class="rp-toc-item rp-link" title="7. 验收标准(PRD v2 整体)" style="padding-left:0" data-depth="0"><span class="rp-toc-item__text rp-doc">7. 验收标准(PRD v2 整体)</span></a></nav><div class="rp-outline__divider"></div><div class="rp-outline__bottom"></div></div></aside></div></div>
+    <div id="__rspress_modal_container"></div>
+  </body>
+</html>
